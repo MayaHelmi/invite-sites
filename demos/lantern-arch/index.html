@@ -1,0 +1,1148 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أحمد و سارة — دعوة زفاف</title>
+
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  /* ── palette sampled from the reference design ─────────────── */
+  :root{
+    --cream      :#f9f1e6;
+    --cream-lift :#fdf8ef;
+    --cream-card :#f5ecdb;
+    --gold       :#9e753c;
+    --gold-light :#c2a061;
+    --gold-pale  :#e9d9b8;
+    --gold-mid   :#dcc79a;
+    --gold-dim   :#cdb587;
+    --bronze     :#6d512a;
+    --ink        :#4a3a20;
+    --ink-soft   :#8a7550;
+    --leaf       :#7c8a5a;
+    --leaf-light :#98a578;
+    --bg-top     :#9e753c;
+    --bg-bot     :#6d512a;
+    --shade      :0 24px 70px rgba(45,32,10,.45);
+    --card-w     :440px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Amiri',serif;
+    color:var(--ink);
+    background:radial-gradient(125% 85% at 50% 0%,var(--bg-top),var(--bg-bot) 72%) fixed;
+    min-height:100vh;display:flex;justify-content:center;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  body.locked{overflow:hidden;height:100vh}
+  .ltr{direction:ltr;unicode-bidi:isolate}
+  /* Cormorant ships old-style figures by default, which draw 1 as a small-cap I
+     ("10" reads as "IO"). Force lining figures wherever we show numbers. */
+  .dateline .num,.tcard b,.cd b,.tl-t,.cal-grid .dy,.cover-date{
+    font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;
+  }
+
+  /* ── drifting sparkles behind the card ─────────────────────── */
+  .sparkles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .sparkles i{
+    position:absolute;top:-8vh;color:rgba(255,242,208,.4);
+    font-style:normal;animation:drift linear infinite;
+  }
+  @keyframes drift{
+    0%{transform:translateY(-8vh) rotate(0)}
+    100%{transform:translateY(114vh) rotate(340deg)}
+  }
+
+  /* ── the invitation column ─────────────────────────────────── */
+  .card{
+    position:relative;z-index:1;width:min(var(--card-w),100vw);
+    background:
+      radial-gradient(150% 55% at 50% 0%,var(--cream-lift) 0%,var(--cream) 62%),
+      var(--cream);
+    box-shadow:var(--shade);min-height:100vh;
+  }
+
+  section{padding:58px 26px;position:relative}
+
+  /* ── section headings + ornaments ──────────────────────────── */
+  .h-sec{
+    font-family:'Aref Ruqaa',serif;font-weight:400;
+    font-size:1.5rem;color:var(--bronze);text-align:center;
+    letter-spacing:.02em;line-height:1.6;
+  }
+  .rule{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin:12px auto 30px;color:var(--gold-light);
+  }
+  .rule::before,.rule::after{
+    content:"";height:1px;width:52px;
+  }
+  .rule::before{background:linear-gradient(90deg,transparent,var(--gold-dim))}
+  .rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+  .rule svg{display:block}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s cubic-bezier(.22,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .sparkles{display:none}
+    #scrollHint.show{animation:none;transform:translateX(-50%)}
+    #scrollHint .chevs svg{animation:none;opacity:1}
+  }
+
+  /* ── buttons ───────────────────────────────────────────────── */
+  .btn{
+    font-family:'Amiri',serif;font-size:1.02rem;
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    background:linear-gradient(158deg,var(--gold-light),var(--gold) 55%,var(--bronze));
+    color:var(--cream-lift);border:none;border-radius:999px;
+    padding:13px 32px;cursor:pointer;text-decoration:none;
+    box-shadow:0 10px 24px rgba(109,81,42,.32);
+    transition:transform .22s ease,box-shadow .22s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 15px 30px rgba(109,81,42,.42)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:none;color:var(--bronze);border:1px solid var(--gold-dim);box-shadow:none}
+  .btn.ghost:hover{background:var(--cream-card);box-shadow:none}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+
+  /* ── cover / envelope ──────────────────────────────────────── */
+  #cover{
+    position:fixed;inset:0;z-index:50;padding:22px;
+    background:radial-gradient(125% 85% at 50% 0%,var(--bg-top),var(--bg-bot) 72%);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .9s ease,visibility .9s;
+  }
+  #cover.gone{opacity:0;visibility:hidden}
+  .cover-in{
+    position:relative;width:min(560px,94vw);overflow:hidden;
+    background:radial-gradient(150% 90% at 50% 0%,var(--cream-lift),var(--cream));
+    border-radius:12px;box-shadow:var(--shade);
+    padding:66px 26px 46px;text-align:center;
+  }
+  .cover-in .flr{position:absolute;width:210px;height:210px;pointer-events:none}
+  .flr.a{top:-30px;right:-34px}
+  .flr.b{top:-30px;left:-34px;transform:scaleX(-1)}
+  .flr.c{bottom:-72px;left:50%;transform:translateX(-50%) scale(1.25);width:320px;opacity:.9}
+  .seal{
+    width:58px;height:58px;border-radius:50%;margin:0 auto 20px;
+    background:linear-gradient(158deg,var(--gold-light),var(--bronze));
+    color:var(--cream-lift);display:flex;align-items:center;justify-content:center;
+    font-size:1.35rem;box-shadow:0 8px 20px rgba(109,81,42,.4);
+  }
+  .names-lg{font-family:'Aref Ruqaa',serif;font-size:2.25rem;line-height:1.45;color:var(--ink)}
+  .amp{font-family:'Alex Brush',cursive;font-size:1.9rem;color:var(--gold);line-height:1}
+  .cover-date{margin-top:14px;color:var(--ink-soft);letter-spacing:.05em;font-size:1.02rem}
+  .cover-sub{margin-top:6px;color:var(--ink-soft);font-size:.95rem}
+  .cover-in .btn{margin-top:24px;position:relative;z-index:2}
+
+  /* ── music toggle ──────────────────────────────────────────── */
+  #music{
+    position:fixed;z-index:40;top:14px;
+    inset-inline-end:max(14px, calc(50vw - min(var(--card-w),100vw)/2 + 14px));
+    width:42px;height:42px;border-radius:50%;
+    border:1px solid var(--gold-pale);background:rgba(253,248,239,.94);
+    color:var(--bronze);font-size:1rem;cursor:pointer;
+    box-shadow:0 6px 16px rgba(45,32,10,.22);
+    display:flex;align-items:center;justify-content:center;
+  }
+  #music.on{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ── hero ──────────────────────────────────────────────────── */
+  /* Kept deliberately short: the next section must peek above the fold,
+     otherwise the hero reads as a complete, self-contained card and guests
+     never realise there is anything below it. */
+  .hero{padding:0 0 18px;text-align:center;overflow:hidden}
+  /* pull the first section's heading up so it clears the fold on short phones */
+  .card section:nth-of-type(2){padding-top:34px}
+  .hero .arch{display:block;width:100%;height:auto}
+
+  /* ── arch legs, continued in CSS ────────────────────────────
+     The SVG draws only the arch head; these two pairs of lines carry
+     its legs down past the names and date so the frame encloses them
+     at any content height. Percentages match the SVG geometry:
+     outer legs sit at x=62 and x=378 of a 440-wide viewBox
+     (14.09% / 85.91%), inner legs at x=80 and x=360 (18.18% / 81.82%). */
+  .hero-body{
+    position:relative;
+    width:71.82%;                 /* 85.91% − 14.09% : spans the outer legs */
+    margin:0 auto;
+    padding:24px 2px 30px;
+  }
+  .hero-body::before,.hero-body::after{
+    content:"";position:absolute;top:0;bottom:0;width:2px;
+    background:linear-gradient(var(--bronze) 0%,var(--bronze) 78%,rgba(109,81,42,0) 100%);
+  }
+  .hero-body::before{left:-1px}
+  .hero-body::after{right:-1px}
+  /* inner pair, 5.695% in from each edge of .hero-body */
+  .legs-in{position:absolute;inset:0;pointer-events:none}
+  .legs-in::before,.legs-in::after{
+    content:"";position:absolute;top:0;bottom:9%;width:1px;
+    background:linear-gradient(rgba(194,160,97,.6) 0%,rgba(194,160,97,.6) 74%,rgba(194,160,97,0) 100%);
+  }
+  .legs-in::before{left:5.695%}
+  .legs-in::after{right:5.695%}
+  .hero-names{font-family:'Aref Ruqaa',serif;font-size:2.5rem;line-height:1.4;color:var(--ink)}
+  .hero-date{margin-top:20px;color:var(--ink-soft);font-size:1.02rem;letter-spacing:.07em}
+  /* ── persistent "scroll down" prompt ───────────────────────
+     Pinned to the viewport, not to the end of the hero, so guests
+     who never scroll still see it. Disappears for good on first scroll. */
+  #scrollHint{
+    /* env() keeps it clear of the iPhone home bar / Safari toolbar */
+    position:fixed;left:50%;bottom:max(20px, calc(env(safe-area-inset-bottom) + 14px));z-index:45;
+    transform:translateX(-50%) translateY(12px);
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    background:linear-gradient(158deg,var(--gold-light),var(--gold) 55%,var(--bronze));
+    color:var(--cream-lift);border:none;border-radius:22px;
+    padding:13px 26px 11px;cursor:pointer;
+    font-family:'Amiri',serif;font-size:1rem;line-height:1.35;
+    /* left:50% alone caps the shrink-to-fit width at half the viewport,
+       which wraps the label; max-content lets it size to the text instead. */
+    text-align:center;width:max-content;max-width:calc(100vw - 36px);
+    box-shadow:0 12px 30px rgba(45,32,10,.45);
+    opacity:0;visibility:hidden;
+    transition:opacity .6s ease,transform .6s ease,visibility .6s;
+  }
+  #scrollHint.show{
+    opacity:1;visibility:visible;
+    animation:bob 1.9s ease-in-out infinite, glow 2.4s ease-in-out infinite;
+  }
+  #scrollHint .txt{display:block}
+  /* three chevrons cascading downward — reads as "keep going down" */
+  #scrollHint .chevs{display:flex;flex-direction:column;align-items:center;height:19px;justify-content:flex-start}
+  #scrollHint .chevs svg{display:block;margin-top:-4px;animation:chev 1.5s ease-in-out infinite}
+  #scrollHint .chevs svg:nth-child(2){animation-delay:.15s}
+  #scrollHint .chevs svg:nth-child(3){animation-delay:.3s}
+  @keyframes bob{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%    {transform:translateX(-50%) translateY(8px)}
+  }
+  @keyframes glow{
+    0%,100%{box-shadow:0 12px 30px rgba(45,32,10,.45)}
+    50%    {box-shadow:0 14px 34px rgba(45,32,10,.5),0 0 0 7px rgba(194,160,97,.15)}
+  }
+  @keyframes chev{
+    0%,100%{opacity:.25;transform:translateY(0)}
+    50%    {opacity:1;transform:translateY(3px)}
+  }
+
+  /* ── families ──────────────────────────────────────────────── */
+  .fams{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  .fam{background:var(--cream-card);border:1px solid var(--gold-pale);border-radius:14px;padding:22px 12px;text-align:center}
+  .fam .k{font-size:.84rem;color:var(--ink-soft)}
+  .fam .n{font-family:'Aref Ruqaa',serif;color:var(--bronze);font-size:1.05rem;margin-top:9px;line-height:1.85}
+  .fam .c{margin-top:11px;font-size:.83rem;color:var(--ink-soft);line-height:1.6}
+  .announce{margin-top:36px;text-align:center;line-height:2.1;color:var(--ink-soft)}
+  .announce .who{font-family:'Aref Ruqaa',serif;font-size:1.42rem;color:var(--ink);margin:10px 0 2px}
+  .announce .role{display:block;font-size:.8rem;color:var(--gold);letter-spacing:.28em;margin-top:2px}
+  .announce .amp{display:block;margin:8px 0}
+
+  /* ── big date row ──────────────────────────────────────────── */
+  .dateline{display:flex;align-items:stretch;justify-content:center;gap:0;margin-top:6px}
+  .dateline .col{
+    display:flex;flex-direction:column;justify-content:center;gap:6px;
+    padding:0 18px;font-size:.98rem;color:var(--ink-soft);text-align:center;min-width:92px;
+  }
+  .dateline .num{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:3.4rem;line-height:1;color:var(--bronze);
+    padding:0 20px;display:flex;align-items:center;
+    border-inline:1px solid var(--gold-pale);
+  }
+  .note-pill{
+    margin:24px auto 0;width:max-content;max-width:100%;
+    background:var(--cream-card);border:1px solid var(--gold-pale);
+    border-radius:999px;padding:9px 24px;color:var(--bronze);font-size:.96rem;
+  }
+
+  /* ── gallery ───────────────────────────────────────────────── */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .g-item{
+    aspect-ratio:3/4;border-radius:9px;overflow:hidden;cursor:pointer;
+    border:1px solid var(--gold-pale);background:var(--cream-card);
+    transition:transform .28s ease,box-shadow .28s ease;
+  }
+  .g-item:hover{transform:scale(1.045);box-shadow:0 8px 20px rgba(109,81,42,.22)}
+  .g-item svg,.g-item img{width:100%;height:100%;display:block;object-fit:cover}
+  .g-item picture{display:block;width:100%;height:100%}
+  .g-note{margin-top:15px;text-align:center;font-size:.8rem;color:var(--ink-soft)}
+
+  #lb{position:fixed;inset:0;z-index:60;background:rgba(35,24,8,.94);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+  #lb.show{display:flex}
+  #lb-stage{width:min(78vw,400px)}
+  #lb-stage svg,#lb-stage img{width:100%;height:auto;border-radius:12px;display:block}
+  #lb-stage picture{display:block;width:100%}
+  .lb-bar{display:flex;align-items:center;gap:20px;color:var(--gold-pale)}
+  .lb-bar button{background:none;border:1px solid var(--gold-dim);color:var(--gold-pale);width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer}
+  .lb-bar button:hover{background:rgba(255,255,255,.08)}
+  #lb-x{position:absolute;top:18px;inset-inline-start:18px;background:none;border:none;color:var(--gold-pale);font-size:1.5rem;cursor:pointer}
+
+  /* ── reception times ───────────────────────────────────────── */
+  .times{display:flex;justify-content:center;gap:12px;margin-top:22px}
+  .tcard{flex:1;max-width:168px;background:var(--cream-card);border:1px solid var(--gold-pale);border-radius:14px;padding:18px 10px;text-align:center}
+  .tcard b{display:block;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.7rem;color:var(--bronze)}
+  .tcard span{font-size:.87rem;color:var(--ink-soft)}
+
+  /* ── countdown ─────────────────────────────────────────────── */
+  .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  .cd div{background:var(--cream-card);border:1px solid var(--gold-pale);border-radius:12px;padding:16px 4px;text-align:center}
+  .cd b{display:block;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.75rem;color:var(--bronze);line-height:1.1}
+  .cd span{font-size:.78rem;color:var(--ink-soft)}
+
+  /* ── calendar ──────────────────────────────────────────────── */
+  .cal{margin-top:26px;background:var(--cream-card);border:1px solid var(--gold-pale);border-radius:16px;padding:20px 14px}
+  .cal h4{text-align:center;font-family:'Aref Ruqaa',serif;font-weight:400;color:var(--bronze);margin-bottom:14px;font-size:1.05rem}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+  .cal-grid .hd{color:var(--gold);font-size:.72rem;padding:4px 0}
+  /* aspect-ratio keeps the cell square so the highlight is a circle, not an oval */
+  .cal-grid .dy{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    margin:0 auto;width:100%;max-width:34px;
+    border-radius:50%;color:var(--ink-soft);font-size:.9rem;
+    font-family:'Cormorant Garamond',serif;
+  }
+  .cal-grid .dy.big{
+    color:var(--cream-lift);position:relative;
+    background:linear-gradient(158deg,var(--gold-light),var(--bronze));
+    animation:halo 2.4s ease infinite;
+  }
+  @keyframes halo{
+    0%,100%{box-shadow:0 0 0 3px var(--cream-card),0 0 0 4px var(--gold-pale)}
+    50%    {box-shadow:0 0 0 3px var(--cream-card),0 0 0 8px rgba(158,117,60,.28)}
+  }
+
+  /* ── venue ─────────────────────────────────────────────────── */
+  .venue{background:var(--cream-card);border:1px solid var(--gold-pale);border-radius:16px;overflow:hidden;text-align:center}
+  .venue svg{width:100%;display:block}
+  .venue-b{padding:22px 20px}
+  .venue-n{font-family:'Aref Ruqaa',serif;color:var(--bronze);font-size:1.12rem}
+  .venue-c{color:var(--ink-soft);font-size:.9rem;margin:7px 0 18px}
+
+  /* ── dress code ────────────────────────────────────────────── */
+  .swatches{display:flex;justify-content:center;gap:16px;margin:6px 0 18px}
+  .swatches i{width:38px;height:38px;border-radius:50%;box-shadow:0 0 0 1px var(--gold-pale),0 4px 10px rgba(109,81,42,.14)}
+  .dress-note{text-align:center;color:var(--ink-soft);line-height:2;font-size:.97rem}
+
+  /* ── programme ─────────────────────────────────────────────── */
+  .tl{position:relative;margin:6px 8px 0;padding-inline-start:28px}
+  .tl::before{content:"";position:absolute;inset-inline-start:6px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--gold-pale),var(--gold-dim),var(--gold-pale))}
+  .tl-i{position:relative;padding-bottom:26px}
+  .tl-i:last-child{padding-bottom:0}
+  .tl-i::before{
+    content:"";position:absolute;inset-inline-start:-26px;top:7px;
+    width:9px;height:9px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 4px var(--cream);
+  }
+  .tl-t{font-family:'Cormorant Garamond',serif;font-size:1.12rem;color:var(--bronze)}
+  .tl-w{color:var(--ink-soft);font-size:.95rem;margin-top:1px}
+
+  /* ── wishes ────────────────────────────────────────────────── */
+  .wform{display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+  .wform input,.wform textarea,
+  .modal input,.modal textarea,.modal select{
+    font-family:'Amiri',serif;font-size:1rem;color:var(--ink);width:100%;
+    background:var(--cream-card);border:1px solid var(--gold-pale);
+    border-radius:12px;padding:12px 16px;outline:none;
+    transition:border-color .2s ease;
+  }
+  .wform textarea{min-height:90px;resize:vertical}
+  .wform input:focus,.wform textarea:focus,
+  .modal input:focus,.modal textarea:focus,.modal select:focus{border-color:var(--gold-light)}
+  .wlist{display:flex;flex-direction:column;gap:11px;max-height:350px;overflow-y:auto;padding-inline-end:5px}
+  .wlist::-webkit-scrollbar{width:5px}
+  .wlist::-webkit-scrollbar-thumb{background:var(--gold-pale);border-radius:9px}
+  .wish{background:var(--cream-card);border:1px solid var(--gold-pale);border-radius:12px;padding:14px 16px}
+  .wish b{color:var(--bronze);font-size:.97rem}
+  .wish time{margin-inline-start:8px;font-size:.71rem;color:var(--ink-soft)}
+  .wish p{margin-top:5px;line-height:1.85;font-size:.95rem;color:var(--ink)}
+
+  /* ── gift ──────────────────────────────────────────────────── */
+  .gift{text-align:center}
+  #gbox{cursor:pointer;transition:transform .3s ease}
+  #gbox:hover{transform:translateY(-4px)}
+  #glid{transition:transform .55s cubic-bezier(.3,1.4,.5,1)}
+  .gift-hint{color:var(--ink-soft);font-size:.9rem;margin-top:10px}
+  .gcards{display:none;flex-direction:column;gap:12px;margin-top:22px}
+  .gcards.show{display:flex;animation:rise .6s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .bank{
+    background:linear-gradient(150deg,var(--cream-lift),var(--cream-card));
+    border:1px solid var(--gold-pale);border-radius:14px;padding:17px;
+    text-align:start;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .bank .r{font-size:.78rem;color:var(--gold)}
+  .bank .n{font-family:'Aref Ruqaa',serif;color:var(--bronze);font-size:1rem;margin:2px 0 3px}
+  .bank .no{font-size:.9rem;color:var(--ink-soft);letter-spacing:.06em}
+  .copy{background:none;border:1px solid var(--gold-dim);color:var(--bronze);border-radius:999px;padding:7px 15px;cursor:pointer;font-family:'Amiri',serif;font-size:.9rem;white-space:nowrap}
+  .copy:hover{background:var(--cream)}
+  .qr{margin-top:6px;padding:16px;background:var(--cream-lift);border:1px dashed var(--gold-dim);border-radius:14px}
+  .qr svg{display:block;margin:0 auto;border-radius:6px}
+  .qr small{display:block;margin-top:10px;color:var(--ink-soft);font-size:.78rem}
+
+  /* ── footer ────────────────────────────────────────────────── */
+  footer{padding:52px 26px 64px;text-align:center;background:linear-gradient(180deg,transparent,rgba(194,160,97,.16))}
+  .foot{font-family:'Aref Ruqaa',serif;color:var(--bronze);font-size:1.2rem;line-height:1.9}
+  .foot-h{color:var(--gold);font-size:1.3rem;margin-top:10px}
+
+  /* ── modal ─────────────────────────────────────────────────── */
+  .mback{position:fixed;inset:0;z-index:70;background:rgba(35,24,8,.62);display:none;align-items:center;justify-content:center;padding:20px}
+  .mback.show{display:flex}
+  .modal{width:min(420px,94vw);background:var(--cream);border-radius:18px;padding:30px 24px 26px;position:relative;animation:rise .4s ease;max-height:92vh;overflow-y:auto}
+  .modal h3{font-family:'Aref Ruqaa',serif;font-weight:400;color:var(--bronze);text-align:center;margin-bottom:6px}
+  .modal .sub{text-align:center;color:var(--ink-soft);font-size:.84rem;margin-bottom:18px}
+  .modal form{display:flex;flex-direction:column;gap:11px}
+  .modal .x{position:absolute;top:12px;inset-inline-start:14px;background:none;border:none;font-size:1.25rem;color:var(--ink-soft);cursor:pointer;line-height:1}
+  .radios{display:flex;gap:10px}
+  .radios label{flex:1;text-align:center;border:1px solid var(--gold-pale);border-radius:12px;padding:11px 6px;cursor:pointer;color:var(--ink-soft);font-size:.93rem;transition:.2s}
+  .radios input{display:none}
+  .radios label:has(input:checked){border-color:var(--gold-light);background:var(--cream-card);color:var(--bronze);font-weight:700}
+  .done{text-align:center;padding:22px 0;display:none}
+  .done .tick{font-size:2.5rem;color:var(--leaf)}
+  .done p{margin-top:8px;color:var(--ink-soft)}
+
+  /* ── toast ─────────────────────────────────────────────────── */
+  #toast{
+    position:fixed;bottom:26px;left:50%;z-index:90;
+    transform:translateX(-50%) translateY(18px);
+    background:var(--ink);color:var(--cream);padding:11px 24px;
+    border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;
+    transition:.35s ease;max-width:90vw;text-align:center;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%)}
+
+
+/* ── RSVP design preview ──────────────────────────────────────────
+   The form is inert and submits nowhere in this portfolio demo, so it
+   is labelled. Inherits the page's own type and colour deliberately —
+   it should read as a quiet annotation, not an error. */
+.rsvp-preview{
+  margin:0 auto 1.1rem; max-width:34ch;
+  padding:.55rem .9rem;
+  font-size:.78rem; line-height:1.5; letter-spacing:.02em;
+  text-align:center; opacity:.68;
+  border:1px dashed currentColor; border-radius:6px;
+}
+
+.wish-sample-note{margin:0 0 .7rem;font-size:.72rem;letter-spacing:.04em;text-align:center;opacity:.55;text-transform:uppercase}
+</style>
+</head>
+<body class="locked">
+<a href="/invite-sites/#choose-your-style" class="is-backchip" dir="ltr" aria-label="Back to Invite Sites">← Invite Sites</a>
+<style>.is-backchip{position:fixed;top:14px;left:14px;z-index:2147483647;display:inline-flex;align-items:center;min-height:36px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.92);color:#1a1a1a;font:600 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .2s ease}.is-backchip:hover{opacity:.8}@media print{.is-backchip{display:none}}</style>
+
+
+<div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gold-v" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c2a061"/><stop offset="1" stop-color="#6d512a"/>
+    </linearGradient>
+    <radialGradient id="lamp-glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0" stop-color="#ffe6ad" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#ffe6ad" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="mashrabiya" width="34" height="34" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#c2a061" stroke-width=".8" opacity=".45">
+        <rect x="7" y="7" width="20" height="20"/>
+        <rect x="7" y="7" width="20" height="20" transform="rotate(45 17 17)"/>
+        <circle cx="17" cy="17" r="3.4"/>
+      </g>
+    </pattern>
+
+    
+    <symbol id="peony" viewBox="-58 -58 116 116">
+      <g stroke="#e3d3ae" stroke-width=".9">
+        <g fill="#eee2c6">
+          <ellipse cx="0" cy="-33" rx="19" ry="25"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(45)"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(90)"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(135)"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(225)"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(270)"/>
+          <ellipse cx="0" cy="-33" rx="19" ry="25" transform="rotate(315)"/>
+        </g>
+        <g fill="#f8efdb">
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(22)"/>
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(73)"/>
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(124)"/>
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(175)"/>
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(226)"/>
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(277)"/>
+          <ellipse cx="0" cy="-21" rx="14" ry="18" transform="rotate(328)"/>
+        </g>
+        <g fill="#fffdf7">
+          <ellipse cx="0" cy="-11" rx="9.5" ry="12" transform="rotate(10)"/>
+          <ellipse cx="0" cy="-11" rx="9.5" ry="12" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-11" rx="9.5" ry="12" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-11" rx="9.5" ry="12" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-11" rx="9.5" ry="12" transform="rotate(288)"/>
+        </g>
+        <circle cx="0" cy="0" r="6.5" fill="#e6cf9b"/>
+      </g>
+    </symbol>
+
+    <symbol id="leaf" viewBox="0 0 40 26">
+      <path d="M1 13C10 1 27 -2 39 6 30 22 12 25 1 13z" fill="#7c8a5a"/>
+      <path d="M1 13C13 11 27 9 39 6" stroke="#93a170" stroke-width="1" fill="none"/>
+    </symbol>
+
+    
+    <symbol id="cluster" viewBox="0 0 210 210">
+      <use href="#leaf" x="18"  y="96"  width="54" height="35" transform="rotate(-24 45 113)"/>
+      <use href="#leaf" x="118" y="112" width="60" height="39" transform="rotate(28 148 131)"/>
+      <use href="#leaf" x="70"  y="8"   width="48" height="31" transform="rotate(-62 94 23)"/>
+      <use href="#leaf" x="140" y="34"  width="52" height="34" transform="rotate(18 166 51)"/>
+      <use href="#peony" x="88"  y="6"   width="104" height="104"/>
+      <use href="#peony" x="30"  y="52"  width="78"  height="78"/>
+      <use href="#peony" x="112" y="86"  width="62"  height="62"/>
+      <use href="#leaf" x="6"   y="44"  width="44" height="29" transform="rotate(-140 28 58)"/>
+    </symbol>
+  </defs>
+</svg>
+
+
+<div id="cover">
+  <div class="cover-in">
+    <svg class="flr a" viewBox="0 0 210 210"><use href="#cluster"/></svg>
+    <svg class="flr b" viewBox="0 0 210 210"><use href="#cluster"/></svg>
+    <div class="seal">♥</div>
+    <div class="names-lg">أحمد<br><span class="amp">&amp;</span><br>سارة</div>
+    <div class="rule"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="cover-date ltr">01 . 01 . 2027</div>
+    <div class="cover-sub">بدعوة زيادة</div>
+    <button type="button" class="btn" id="openBtn">فتح الدعوة ✉</button>
+  </div>
+</div>
+
+<button type="button" id="music" title="الموسيقى" aria-label="تشغيل الموسيقى">♪</button>
+
+<audio id="bgm" loop preload="none"></audio>
+
+<div class="card">
+
+  
+  <section class="hero">
+    <svg class="arch" viewBox="0 0 440 250" aria-hidden="true">
+      <defs>
+        <clipPath id="archclip">
+          <path d="M62 250V212C62 132 128 68 220 34 312 68 378 132 378 212v38z"/>
+        </clipPath>
+      </defs>
+
+      
+      <g clip-path="url(#archclip)">
+        <rect x="0" y="0" width="440" height="250" fill="url(#mashrabiya)" opacity=".34"/>
+      </g>
+
+      
+      <path d="M62 250V212C62 132 128 68 220 34 312 68 378 132 378 212v38"
+            fill="none" stroke="url(#gold-v)" stroke-width="2.4"/>
+      <path d="M80 250V216C80 142 140 84 220 52 300 84 360 142 360 216v34"
+            fill="none" stroke="#c2a061" stroke-width="1" opacity=".6"/>
+      
+      <g fill="none" stroke="#c2a061" stroke-width=".9" opacity=".5">
+        <path d="M118 150a15 15 0 0 0 26-9M158 106a15 15 0 0 0 27-7M204 78a15 15 0 0 0 28-2M252 92a15 15 0 0 0 26 10M292 124a15 15 0 0 0 22 17"/>
+      </g>
+
+      
+      <g>
+        <line x1="132" y1="0" x2="132" y2="158" stroke="#9e753c" stroke-width="1"/>
+        <circle cx="132" cy="196" r="38" fill="url(#lamp-glow)"/>
+        <g transform="translate(132 178)">
+          <path d="M-3-22h6l2 7h-10z" fill="#6d512a"/>
+          <path d="M-12-15h24l4 26c0 11-9 18-16 18s-16-7-16-18z" fill="#c2a061"/>
+          <path d="M-8-15l3 40M8-15l-3 40M0-15v42" stroke="#6d512a" stroke-width=".9" fill="none"/>
+          <ellipse cx="0" cy="4" rx="6.5" ry="10" fill="#ffe6ad" opacity=".9"/>
+          <path d="M-5 30h10l-5 9z" fill="#6d512a"/>
+        </g>
+
+        <line x1="308" y1="0" x2="308" y2="134" stroke="#9e753c" stroke-width="1"/>
+        <circle cx="308" cy="172" r="38" fill="url(#lamp-glow)"/>
+        <g transform="translate(308 154)">
+          <path d="M-3-22h6l2 7h-10z" fill="#6d512a"/>
+          <path d="M-12-15h24l4 26c0 11-9 18-16 18s-16-7-16-18z" fill="#c2a061"/>
+          <path d="M-8-15l3 40M8-15l-3 40M0-15v42" stroke="#6d512a" stroke-width=".9" fill="none"/>
+          <ellipse cx="0" cy="4" rx="6.5" ry="10" fill="#ffe6ad" opacity=".9"/>
+          <path d="M-5 30h10l-5 9z" fill="#6d512a"/>
+        </g>
+      </g>
+
+      
+      <use href="#cluster" x="-46" y="-38" width="232" height="232"/>
+      <g transform="translate(440 0) scale(-1 1)">
+        <use href="#cluster" x="-46" y="-38" width="232" height="232"/>
+      </g>
+    </svg>
+
+    <div class="hero-body">
+      <span class="legs-in" aria-hidden="true"></span>
+      <div class="hero-names reveal">أحمد<br><span class="amp">&amp;</span><br>سارة</div>
+      <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+      <div class="hero-date reveal">الجمعة <span class="ltr">1</span> كانون الثاني <span class="ltr">2027</span></div>
+    </div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">معلومات الحفل</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="fams reveal">
+      <div class="fam">
+        <div class="k">السيد والسيدة</div>
+        <div class="n">سليم التميمي<br>أمل الحمادي</div>
+        <div class="c">دبي، الإمارات<br>العربية المتحدة</div>
+      </div>
+      <div class="fam">
+        <div class="k">السيد والسيدة</div>
+        <div class="n">حمد الخالدي<br>سارة الخالدي</div>
+        <div class="c">أبوظبي، الإمارات<br>العربية المتحدة</div>
+      </div>
+    </div>
+    <div class="announce reveal">
+      <p>بكل الحب والسرور نعلن<br>عن زفاف أبنائنا</p>
+      <div class="who">أحمد التميمي<span class="role">العريس</span></div>
+      <span class="amp">&amp;</span>
+      <div class="who">سارة الخالدي<span class="role">العروس</span></div>
+    </div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">حفل الزفاف</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="dateline reveal">
+      <div class="col"><span>الجمعة</span><span class="ltr">11:00</span></div>
+      <div class="num ltr">1</div>
+      <div class="col"><span>كانون الثاني</span><span class="ltr">2027</span></div>
+    </div>
+    <div class="note-pill reveal">يبدأ عقد القران في تمام الساعة <span class="ltr">11:00</span> صباحاً</div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">معرض الصور</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="gal reveal" id="gal"></div>
+    <p class="g-note reveal">صور تجريبية — استبدلها بصور العروسين</p>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">حفل الاستقبال</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="dateline reveal">
+      <div class="col"><span>الجمعة</span><span class="ltr">13:00</span></div>
+      <div class="num ltr">1</div>
+      <div class="col"><span>كانون الثاني</span><span class="ltr">2027</span></div>
+    </div>
+    <div class="times reveal">
+      <div class="tcard"><b class="ltr">12:30</b><span>استقبال الضيوف</span></div>
+      <div class="tcard"><b class="ltr">13:00</b><span>بدء الحفل</span></div>
+    </div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">العد التنازلي</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="cd reveal">
+      <div><b id="cd-d">—</b><span>يوم</span></div>
+      <div><b id="cd-h">—</b><span>ساعة</span></div>
+      <div><b id="cd-m">—</b><span>دقيقة</span></div>
+      <div><b id="cd-s">—</b><span>ثانية</span></div>
+    </div>
+    <div class="cal reveal">
+      <h4>كانون الثاني <span class="ltr">2027</span></h4>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+    <div class="cta reveal">
+      <button type="button" class="btn ghost" id="icsBtn">أضف إلى التقويم</button>
+      <button type="button" class="btn" id="rsvpBtn">تأكيد الحضور ♡</button>
+    </div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">مكان حفل الاستقبال</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="venue reveal">
+      <svg viewBox="0 0 440 170" aria-hidden="true">
+        <rect width="440" height="170" fill="#efe4cc"/>
+        <g stroke="#dcc79a" stroke-width="4" fill="none" opacity=".85">
+          <path d="M-10 58c92 12 152-32 244-18s158 52 216 42"/>
+          <path d="M-10 122c82-18 172 26 262 8s142-42 198-28"/>
+          <path d="M118-10c-6 62 20 122 6 190M332-10c10 72-16 122-4 190"/>
+        </g>
+        <circle cx="220" cy="84" r="31" fill="rgba(158,117,60,.16)"/>
+        <g transform="translate(220 80)">
+          <path d="M0-26c-14 0-25 11-25 24C-25 13 0 35 0 35S25 13 25-2C25-15 14-26 0-26z" fill="#6d512a"/>
+          <circle cx="0" cy="-2" r="9" fill="#f9f1e6"/>
+        </g>
+      </svg>
+      <div class="venue-b">
+        <div class="venue-n">فندق قاعة اللؤلؤة</div>
+        <div class="venue-c">دبي، الإمارات العربية المتحدة</div>
+        <a class="btn ghost" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=Al+Lulua+Hall+Dubai">افتح في الخرائط 📍</a>
+      </div>
+    </div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">قواعد اللباس</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="swatches reveal" aria-hidden="true">
+      <i style="background:#f9f1e6"></i>
+      <i style="background:#e9d9b8"></i>
+      <i style="background:#c2a061"></i>
+      <i style="background:#9e753c"></i>
+      <i style="background:#6d512a"></i>
+    </div>
+    <p class="dress-note reveal">يسعدنا حضوركم بملابس الحفل الرسمية<br>بدرجات الذهبي والبيج والبني</p>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">برنامج اليوم</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="tl reveal">
+      <div class="tl-i"><div class="tl-t ltr">17:30</div><div class="tl-w">استقبال الضيوف</div></div>
+      <div class="tl-i"><div class="tl-t ltr">18:30</div><div class="tl-w">بدء الحفل</div></div>
+      <div class="tl-i"><div class="tl-t ltr">18:45</div><div class="tl-w">نخب وقطع الكعكة</div></div>
+      <div class="tl-i"><div class="tl-t ltr">19:00</div><div class="tl-w">العشاء الرئيسي</div></div>
+      <div class="tl-i"><div class="tl-t ltr">21:00</div><div class="tl-w">ختام الحفل</div></div>
+    </div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">سجل التهاني</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <p class="rsvp-preview" role="note">معاينة سجل التهاني — غير مفعّلة في هذا النموذج</p>
+      <form class="wform reveal" id="wForm" inert aria-disabled="true">
+      <input id="wName" placeholder="اسمك الزياد" required maxlength="40">
+      <textarea id="wText" placeholder="اكتب تهنئتك للعروسين…" required maxlength="300"></textarea>
+      <button class="btn" type="button">إرسال التهنئة 🪄</button>
+    </form>
+    <p class="wish-sample-note">رسائل توضيحية لعرض التصميم</p>
+    <div class="wlist reveal" id="wList"></div>
+  </section>
+
+  
+  <section>
+    <h2 class="h-sec reveal">صندوق الهدية</h2>
+    <div class="rule reveal"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M4.5 0 9 4.5 4.5 9 0 4.5z" fill="currentColor"/></svg></div>
+    <div class="gift reveal">
+      <svg id="gbox" width="156" height="146" viewBox="0 0 156 146" role="button" tabindex="0" aria-label="افتح صندوق الهدية">
+        <g id="glid">
+          <path d="M78 40C60 12 30 16 34 34c3 14 26 11 44 6zM78 40c18-28 48-24 44-6-3 14-26 11-44 6z"
+                fill="none" stroke="#c2a061" stroke-width="5" stroke-linecap="round"/>
+          <rect x="20" y="40" width="116" height="27" rx="5" fill="#6d512a"/>
+          <rect x="69" y="40" width="18" height="27" fill="#c2a061"/>
+        </g>
+        <g id="gbody">
+          <rect x="28" y="67" width="100" height="64" rx="6" fill="#9e753c"/>
+          <rect x="69" y="67" width="18" height="64" fill="#e9d9b8"/>
+        </g>
+      </svg>
+      <div class="gift-hint" id="gHint">✦ اضغط للفتح ✦</div>
+
+      <div class="gcards" id="gCards">
+        
+        <div class="bank">
+          <div>
+            <div class="r">العريس</div>
+            <div class="n">أحمد التميمي</div>
+            <div class="no ltr">AE00 0000 0000 0000 0000 000</div>
+          </div>
+          <button type="button" class="copy" data-copy="AE000000000000000000000">نسخ</button>
+        </div>
+        <div class="bank">
+          <div>
+            <div class="r">العروس</div>
+            <div class="n">سارة الخالدي</div>
+            <div class="no ltr">AE11 1111 1111 1111 1111 111</div>
+          </div>
+          <button type="button" class="copy" data-copy="AE111111111111111111111">نسخ</button>
+        </div>
+        <div class="qr">
+          <svg width="120" height="120" viewBox="0 0 29 29" shape-rendering="crispEdges" id="qrArt"></svg>
+          <small>رمز توضيحي فقط — استبدله برمز QR حقيقي</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot reveal">حضوركم أعظم هدية نتمناها</div>
+    <div class="foot-h reveal">♡</div>
+  </footer>
+</div>
+
+
+<div id="lb" role="dialog" aria-label="معرض الصور" aria-modal="true">
+  <button type="button" id="lb-x" aria-label="إغلاق">✕</button>
+  <div id="lb-stage"></div>
+  <div class="lb-bar">
+    <button type="button" id="lb-next" aria-label="التالي">‹</button>
+    <span id="lb-count" class="ltr">1 / 9</span>
+    <button type="button" id="lb-prev" aria-label="السابق">›</button>
+  </div>
+</div>
+
+
+<div class="mback" id="rModal">
+  <div class="modal">
+    <button type="button" class="x" id="rClose" aria-label="إغلاق">✕</button>
+    <h3>تأكيد الحضور</h3>
+    <p class="sub">نرجو تأكيد حضوركم قبل <span class="ltr">15</span> كانون الأول</p>
+    <p class="rsvp-preview" role="note">معاينة تأكيد الحضور — غير مفعّلة في هذا النموذج</p>
+      <form id="rForm" inert aria-disabled="true">
+      <input id="rName" placeholder="الاسم الكامل" required maxlength="60">
+      <div class="radios">
+        <label><input type="radio" name="att" value="yes" checked><span>سأحضر بإذن الله</span></label>
+        <label><input type="radio" name="att" value="no"><span>أعتذر عن الحضور</span></label>
+      </div>
+      <select id="rCount" aria-label="عدد الأشخاص">
+        <option value="1">شخص واحد</option>
+        <option value="2">شخصان</option>
+        <option value="3">3 أشخاص</option>
+        <option value="4">4 أشخاص</option>
+        <option value="5">5 أشخاص أو أكثر</option>
+      </select>
+      <textarea id="rNote" placeholder="ملاحظة (اختياري)" maxlength="200"></textarea>
+      <button class="btn" type="button">إرسال ✓</button>
+    </form>
+      <p>شكراً لكم! تم تسجيل ردكم.</p>
+    </div>
+  </div>
+</div>
+
+<button type="button" id="scrollHint" aria-label="المزيد من التفاصيل بالأسفل، اضغط للمتابعة">
+  <span class="txt">المزيد من التفاصيل بالأسفل</span>
+  <span class="chevs" aria-hidden="true">
+    <svg width="22" height="12" viewBox="0 0 22 12"><path d="M2 2l9 8 9-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg width="22" height="12" viewBox="0 0 22 12"><path d="M2 2l9 8 9-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg width="22" height="12" viewBox="0 0 22 12"><path d="M2 2l9 8 9-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </span>
+</button>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ═══════════ CONFIG — edit per couple ═══════════ */
+const CONFIG = {
+  title      : 'زفاف أحمد و سارة',
+  countdownTo: '2027-01-01T13:00:00',   // reception start, visitor's local time
+  cal        : { year: 2027, month: 0, day: 1 },  // month is 0-based (8 = Sep)
+  ics        : { start: '20270101T110000', end: '20270101T160000',
+                 where: 'قاعة اللؤلؤة، دبي' },
+  musicFile  : 'wedding-music.mp3',
+  photoCount : 9,
+};
+
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const pad = n => String(n).padStart(2, '0');
+
+/* ── sparkles ─────────────────────────────────────────────── */
+(() => {
+  const host = $('#sparkles'), g = ['✦','✧','❁','✿'];
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('i');
+    s.textContent = g[i % g.length];
+    s.style.left = (Math.random() * 100) + 'vw';
+    s.style.fontSize = (9 + Math.random() * 14) + 'px';
+    s.style.animationDuration = (10 + Math.random() * 15) + 's';
+    s.style.animationDelay = (-Math.random() * 22) + 's';
+    host.appendChild(s);
+  }
+})();
+
+/* ── cover + music ────────────────────────────────────────── */
+const bgm = $('#bgm'), musicBtn = $('#music');
+let playing = false;
+// `announce` is false for the automatic attempt when the cover opens, so a
+// missing music file stays silent instead of greeting every guest with an error.
+function playMusic(announce) {
+  if (!bgm.src) bgm.src = CONFIG.musicFile;   // fetch lazily: no 404 on load
+  bgm.play()
+    .then(() => { playing = true; musicBtn.classList.add('on'); })
+    .catch(() => { if (announce) toast('ضع ملف ' + CONFIG.musicFile + ' بجانب الصفحة لتشغيل الموسيقى'); });
+}
+musicBtn.addEventListener('click', () => {
+  if (playing) { bgm.pause(); playing = false; musicBtn.classList.remove('on'); }
+  else playMusic(true);
+});
+$('#openBtn').addEventListener('click', () => {
+  $('#cover').classList.add('gone');
+  document.body.classList.remove('locked');
+  playMusic(false);
+  // let the cover finish fading, then prompt them to scroll
+  setTimeout(showHint, 700);
+  setTimeout(nudge, 2000);        // then physically demonstrate that it moves
+  setTimeout(nudge, 7000);        // once more if they still haven't moved
+});
+
+/* ── "scroll down" prompt ─────────────────────────────────────
+   Guests who have never used a scrolling invitation don't realise
+   there is anything below the first screen. This pins a labelled
+   prompt to the bottom of the viewport until they scroll once. */
+const hint = $('#scrollHint');
+let hintDone = false;
+function showHint() { if (!hintDone) hint.classList.add('show'); }
+function killHint() { hintDone = true; hint.classList.remove('show'); }
+addEventListener('scroll', () => { if (window.scrollY > 90) killHint(); }, { passive: true });
+// tapping it does the scrolling for them
+hint.addEventListener('click', () => {
+  const first = document.querySelector('.card section:nth-of-type(2)');
+  if (first) first.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  killHint();
+});
+
+/* ── auto-nudge ───────────────────────────────────────────────
+   The strongest possible cue: move the page a little and let it settle
+   back, so the guest SEES that it scrolls rather than reading that it
+   does. Peaks at 70px — deliberately under the 90px dismiss threshold,
+   so the nudge never hides its own prompt. Aborts the moment the guest
+   touches the screen, and never runs if they've already scrolled. */
+let userTookOver = false;
+['wheel', 'touchstart', 'keydown'].forEach(ev =>
+  addEventListener(ev, () => { userTookOver = true; }, { passive: true }));
+
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function nudge() {
+  if (userTookOver || hintDone || reducedMotion || window.scrollY > 20) return;
+  const from = window.scrollY, peak = 70, ms = 700;
+  let t0 = null;
+  const step = ts => {
+    if (userTookOver) return;                  // hand control straight back
+    if (t0 === null) t0 = ts;
+    const p = Math.min(1, (ts - t0) / ms);
+    // behavior:'instant' is essential — the stylesheet sets scroll-behavior:smooth,
+    // and without this each frame would kick off a competing smooth animation
+    // and the page would never actually move.
+    window.scrollTo({ top: from + peak * Math.sin(p * Math.PI), behavior: 'instant' });
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+/* ── scroll reveal ────────────────────────────────────────── */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .14 });
+$$('.reveal').forEach(el => io.observe(el));
+
+/* ── gallery: real photographs + lightbox ─────────────────── */
+const MOTIF = ['❁','✿','♡','✦','❀','❋','✧','❃','✾'];
+function photoSVG(i) {
+  return `<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="300" height="400" fill="${i % 2 ? '#f2e8d2' : '#eee2c6'}"/>
+    <path d="M42 392V168c0-58 40-102 108-124 68 22 108 66 108 124v224"
+          fill="#fdf8ef" stroke="#c2a061" stroke-width="2"/>
+    <text x="150" y="238" text-anchor="middle" font-size="62" fill="#c2a061">${MOTIF[i % 9]}</text>
+    <text x="150" y="322" text-anchor="middle" font-size="24" fill="#6d512a"
+          font-family="Amiri, serif">صورة ${i + 1}</text>
+  </svg>`;
+}
+const gal = $('#gal');
+for (let i = 0; i < CONFIG.photoCount; i++) {
+  const d = document.createElement('div');
+  d.className = 'g-item';
+  /* AVIF first, WebP fallback. The <img> src is the WebP, not a JPEG: the
+     JPEGs were superseded and deleted, so WebP is the floor. The lightbox
+     clones this markup wholesale, so <picture> has to survive the clone —
+     hence the .g-item/#lb-stage picture rules in the stylesheet. */
+  d.innerHTML = `<picture><source srcset="photo${i + 1}.avif" type="image/avif"><img src="photo${i + 1}.webp" alt="صورة من حفل الزفاف" loading="lazy" decoding="async" width="800" height="800"></picture>`;
+  d.addEventListener('click', () => openLB(i));
+  gal.appendChild(d);
+}
+const lb = $('#lb');
+let lbi = 0;
+const N = CONFIG.photoCount;
+function drawLB() {
+  $('#lb-stage').innerHTML = gal.children[lbi].innerHTML;
+  $('#lb-count').textContent = `${lbi + 1} / ${N}`;
+}
+function openLB(i) { lbi = i; drawLB(); lb.classList.add('show'); }
+$('#lb-x').addEventListener('click', () => lb.classList.remove('show'));
+$('#lb-prev').addEventListener('click', () => { lbi = (lbi + N - 1) % N; drawLB(); });
+$('#lb-next').addEventListener('click', () => { lbi = (lbi + 1) % N; drawLB(); });
+lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('show'); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('show')) return;
+  if (e.key === 'Escape')     lb.classList.remove('show');
+  if (e.key === 'ArrowLeft')  { lbi = (lbi + 1) % N; drawLB(); }
+  if (e.key === 'ArrowRight') { lbi = (lbi + N - 1) % N; drawLB(); }
+});
+
+/* ── countdown (REAL) ─────────────────────────────────────── */
+const target = new Date(CONFIG.countdownTo).getTime();
+(function tick() {
+  let ms = Math.max(0, target - Date.now());
+  const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+  const h = Math.floor(ms / 36e5);  ms -= h * 36e5;
+  const m = Math.floor(ms / 6e4);   ms -= m * 6e4;
+  const s = Math.floor(ms / 1e3);
+  $('#cd-d').textContent = d;
+  $('#cd-h').textContent = pad(h);
+  $('#cd-m').textContent = pad(m);
+  $('#cd-s').textContent = pad(s);
+  setTimeout(tick, 1000);
+})();
+
+/* ── calendar (REAL, generated; week starts Monday) ───────── */
+(() => {
+  const grid = $('#calGrid');
+  ['إث','ثل','أر','خم','جم','سب','أح'].forEach(h => {
+    const c = document.createElement('div');
+    c.className = 'hd'; c.textContent = h; grid.appendChild(c);
+  });
+  const { year, month, day } = CONFIG.cal;
+  const jsFirst = new Date(year, month, 1).getDay();  // 0 = Sunday
+  const lead    = (jsFirst + 6) % 7;                  // shift so Monday = 0
+  const total   = new Date(year, month + 1, 0).getDate();
+  for (let i = 0; i < lead; i++) grid.appendChild(document.createElement('div'));
+  for (let d = 1; d <= total; d++) {
+    const c = document.createElement('div');
+    c.className = 'dy' + (d === day ? ' big' : '');
+    c.textContent = d;
+    grid.appendChild(c);
+  }
+})();
+
+/* ── .ics download (REAL) ─────────────────────────────────── */
+$('#icsBtn').addEventListener('click', () => {
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//wedding-invite//AR','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    'UID:' + Date.now() + '@wedding-invite',
+    'DTSTAMP:' + CONFIG.ics.start + 'Z',
+    'DTSTART:' + CONFIG.ics.start,
+    'DTEND:'   + CONFIG.ics.end,
+    'SUMMARY:' + CONFIG.title,
+    'LOCATION:' + CONFIG.ics.where,
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = 'wedding.ics'; a.click();
+  URL.revokeObjectURL(url);
+  toast('تم تنزيل ملف التقويم');
+});
+
+/* ── RSVP (MOCKED — saves in this browser only) ───────────── */
+const rModal = $('#rModal');
+const closeR = () => rModal.classList.remove('show');
+$('#rsvpBtn').addEventListener('click', () => rModal.classList.add('show'));
+$('#rClose').addEventListener('click', closeR);
+rModal.addEventListener('click', e => { if (e.target === rModal) closeR(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeR(); });
+
+
+/* ── guestbook (MOCKED — seed + localStorage) ─────────────── */
+const SEED = [
+  { name: 'هند الكعبي',    text: 'مبارك الزواج، وبارك الله لكما وجمع بينكما في خير.' },
+  { name: 'سالم البلوشي',  text: 'ألف مبروك للعروسين، وعقبال الفرحة الدائمة بإذن الله.' },
+  { name: 'دانة التميمي',   text: 'أجمل التهاني من القلب، دامت لكما السعادة والمحبة.' },
+  { name: 'ماجد النعيمي',     text: 'تهانينا الحارة! بداية موفقة لحياة جميلة معاً.' },
+  { name: 'شيخة المهيري',  text: 'أسعد الله أيامكما القادمة، وجعلها كلها أفراحاً.' },
+];
+function renderWishes() {
+  const mine = JSON.parse(localStorage.getItem('lantern_arch_wishes') || '[]');
+  const list = $('#wList');
+  list.innerHTML = '';
+  [...mine].reverse().concat(SEED).forEach(w => {
+    const el = document.createElement('div');
+    el.className = 'wish';
+    el.innerHTML = '<b></b><time></time><p></p>';
+    el.querySelector('b').textContent = w.name;            // textContent = no HTML injection
+    el.querySelector('p').textContent = w.text;
+    el.querySelector('time').textContent = w.at
+      ? new Date(w.at).toLocaleString('ar', { dateStyle: 'short', timeStyle: 'short' })
+      : '';
+    list.appendChild(el);
+  });
+}
+renderWishes();
+
+
+/* RSVP / guestbook are a design preview in this portfolio demo: the
+   forms are inert and submit nowhere, so the handler that faked a
+   confirmation was removed (DECISIONS-2 D7). A working-looking form
+   that records nothing lies to whoever uses it. Real submissions
+   arrive in Phase 5 via our own Route Handler. */
+
+/* ── gift box ─────────────────────────────────────────────── */
+function openGift() {
+  $('#gCards').classList.add('show');
+  $('#gHint').textContent = 'حضوركم أعظم هدية، وإن أحببتم:';
+  $('#glid').style.transform = 'translateY(-18px) rotate(-7deg)';
+}
+$('#gbox').addEventListener('click', openGift);
+$('#gbox').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGift(); } });
+
+$$('.copy').forEach(b => b.addEventListener('click', () => {
+  const v = b.dataset.copy;
+  const ok = () => { toast('تم نسخ رقم الحساب'); b.textContent = 'تم ✓'; setTimeout(() => b.textContent = 'نسخ', 1800); };
+  if (navigator.clipboard) navigator.clipboard.writeText(v).then(ok).catch(() => prompt('انسخ الرقم:', v));
+  else prompt('انسخ الرقم:', v);
+}));
+
+/* PLACEHOLDER: decorative QR-looking block. Not a scannable code.
+   Replace the whole .qr div with a real generated QR image. */
+(() => {
+  const svg = $('#qrArt');
+  let seed = 7;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  let out = '<rect width="29" height="29" fill="#fdf8ef"/>';
+  for (let y = 0; y < 29; y++)
+    for (let x = 0; x < 29; x++)
+      if (rnd() > .55) out += `<rect x="${x}" y="${y}" width="1" height="1" fill="#6d512a"/>`;
+  // three finder squares
+  [[1,1],[21,1],[1,21]].forEach(([fx,fy]) => {
+    out += `<rect x="${fx}" y="${fy}" width="7" height="7" fill="#6d512a"/>
+            <rect x="${fx+1}" y="${fy+1}" width="5" height="5" fill="#fdf8ef"/>
+            <rect x="${fx+2}" y="${fy+2}" width="3" height="3" fill="#6d512a"/>`;
+  });
+  svg.innerHTML = out;
+})();
+
+/* ── toast ────────────────────────────────────────────────── */
+let tT;
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(tT);
+  tT = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ══════════════════════════════════════════════════════════
+   MAKING RSVP + GUESTBOOK REAL
+   Right now both write to localStorage, which lives in each
+   visitor's own browser. You will never see what they submit.
+   To collect responses you need a backend. Smallest options:
+     • Google Forms / Sheets  — point the form at a Form action URL
+     • Formspree / Getform    — change <form> action to their endpoint
+     • Supabase / Firebase    — replace the localStorage calls with
+                                a single insert() per submit
+   Until you do one of those, treat these two sections as a demo.
+   ══════════════════════════════════════════════════════════ */
+</script>
+</body>
+</html>

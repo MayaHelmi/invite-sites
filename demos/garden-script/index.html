@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmad &amp; Sara — Wedding Invitation</title>
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* measured from the reference theme */
+    --brown:#7c6a60;          /* rgb(124,106,96)  headings, primary */
+    --brown-soft:#918077;     /* rgb(145,128,119) secondary text */
+    --brown-text:#827771;     /* rgb(130,119,113) hero text */
+    --light:#ded9d7;          /* rgb(222,217,215) text on brown */
+    --paper:#fdf8f3;
+    --paper-warm:#f7ece1;
+    --card:#fffaf5;
+
+    --serif:Baskerville,"Libre Baskerville","Times New Roman",serif;
+    --garamond:"EB Garamond","Times New Roman",serif;
+    --cormorant:"Cormorant Garamond","Times New Roman",serif;
+    --script:"The Nautigal",cursive;
+
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--serif);
+    color:var(--brown);
+    background:#e6dad0;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.locked{overflow:hidden}
+  img,svg{display:block;max-width:100%}
+
+  /* ============================================================
+     SHARED DECOR
+     Original artwork — hand-built SVG, not copied from the source
+     ============================================================ */
+  .grain{position:absolute;inset:0;background-image:var(--grain);pointer-events:none;z-index:1;mix-blend-mode:multiply}
+  /* max-width:none — decor is intentionally wider than the page and clipped by the section */
+  .decor{position:absolute;pointer-events:none;z-index:0;max-width:none}
+  /* arch sits behind the announcement; its inner walls are 52% of its width,
+     so it must stay wide enough to clear the longest name line */
+  .arch-bg{left:50%;top:16%;width:130%;transform:translateX(-50%);opacity:.16}
+
+  /* ============================================================
+     ENVELOPE
+     ============================================================ */
+  #envelope{
+    position:fixed;inset:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    background:radial-gradient(1100px 640px at 50% 32%, #f0e4d8 0%, #e5d5c6 58%, #dbc8b7 100%);
+    transition:opacity .95s ease, visibility .95s;
+  }
+  #envelope.opened{opacity:0;visibility:hidden}
+  .env-card{
+    position:relative;width:min(520px,92vw);padding:66px 34px 42px;
+    background:var(--card);border-radius:6px;text-align:center;
+    box-shadow:0 30px 62px rgba(93,78,69,.3), 0 3px 12px rgba(93,78,69,.16);
+  }
+  .env-clip{position:absolute;inset:0;border-radius:6px;overflow:hidden;pointer-events:none}
+  .env-seal{
+    position:absolute;top:-26px;left:50%;transform:translateX(-50%);
+    width:52px;height:52px;border-radius:50%;background:var(--brown);
+    display:flex;align-items:center;justify-content:center;z-index:3;
+    box-shadow:0 6px 16px rgba(93,78,69,.38);
+  }
+  .env-seal svg{width:21px;height:21px;fill:var(--card)}
+  .env-inner{position:relative;z-index:2}
+  .env-names{font-family:var(--serif);font-style:italic;font-weight:400;font-size:30px;line-height:1.35;color:var(--brown-text)}
+  .env-names .amp{font-family:var(--script);font-style:normal;font-size:42px;color:var(--brown-soft);display:block;line-height:1}
+  .env-orn{margin:14px auto 12px;width:120px;opacity:.75}
+  .env-date{font-family:var(--serif);font-size:15px;letter-spacing:.12em;color:var(--brown-soft)}
+  .env-sub{margin-top:16px;font-family:var(--serif);font-size:15px;color:var(--brown-soft)}
+  .btn-open{
+    margin-top:24px;font-family:var(--serif);font-size:15px;letter-spacing:.06em;
+    padding:13px 42px;border:none;border-radius:999px;cursor:pointer;
+    background:var(--brown);color:var(--light);
+    box-shadow:0 8px 18px rgba(93,78,69,.32);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-open:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(93,78,69,.4)}
+
+  /* ============================================================
+     PAGE
+     ============================================================ */
+  .page{max-width:560px;margin:0 auto;background:var(--paper);box-shadow:0 0 70px rgba(93,78,69,.26);overflow:hidden}
+  section{position:relative;padding:60px 26px;overflow:hidden;isolation:isolate}
+  section > *{position:relative;z-index:2}
+  section.warm{background:var(--paper-warm)}
+
+  /* section heading — serif bold 20px uppercase (measured) */
+  .sec-title{
+    font-family:var(--serif);font-weight:700;font-size:20px;
+    letter-spacing:.5px;text-transform:uppercase;color:var(--brown);text-align:center;
+  }
+  .orn{display:block;margin:14px auto 0;width:118px;opacity:.75}
+
+  .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+  .rv.in{opacity:1;transform:none}
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{padding-top:74px;text-align:center}
+  .hero .eyebrow{
+    font-family:var(--cormorant);font-weight:600;font-size:13px;
+    letter-spacing:2.08px;text-transform:uppercase;color:var(--brown-text);
+  }
+  .hero .names{
+    font-family:var(--serif);font-style:italic;font-weight:400;font-size:30px;
+    color:var(--brown-text);margin-top:16px;line-height:1.45;
+  }
+  .hero .names .amp{font-family:var(--script);font-style:normal;font-size:42px;color:var(--brown-soft);vertical-align:-4px;margin:0 6px}
+  .hero .leaf-l{left:-22%;top:2%;width:52%}
+  .hero .leaf-r{right:-20%;top:26%;width:46%;transform:scaleX(-1)}
+
+  /* framed photo */
+  .frame{position:relative;width:min(300px,78%);margin:38px auto 0}
+  .frame .shot{position:relative;background:#fff;padding:12px 12px 44px;box-shadow:0 16px 34px rgba(93,78,69,.2);transform:rotate(-1.6deg)}
+  .frame .tape{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-2deg);
+    width:104px;height:28px;background:rgba(238,224,208,.9);
+    box-shadow:0 2px 5px rgba(93,78,69,.14);z-index:4;
+  }
+  .frame .cap{
+    position:absolute;bottom:12px;left:0;right:0;text-align:center;
+    font-family:var(--script);font-size:26px;color:var(--brown-soft);line-height:1;
+  }
+  .ph{
+    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+    background:linear-gradient(155deg,#e9dac9 0%,#d9c3ad 48%,#c9ae96 100%);color:rgba(93,78,69,.72);
+  }
+  .ph svg{width:26px;height:26px;opacity:.6}
+  .ph span{font-family:var(--cormorant);font-size:10px;letter-spacing:.24em;text-transform:uppercase}
+  .frame .ph{aspect-ratio:1122/1440}
+
+  /* ============================================================
+     FAMILIES / ANNOUNCEMENT
+     ============================================================ */
+  .fams{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px;text-align:center}
+  .fam .mr{font-family:var(--serif);font-weight:300;font-size:12px;color:var(--brown-soft)}
+  .fam .nm{font-family:var(--serif);font-weight:600;font-size:12px;color:var(--brown);line-height:1.9;margin-top:6px}
+  .fam .city{font-family:var(--serif);font-weight:300;font-size:10px;color:var(--brown-soft);margin-top:6px}
+
+  .announce{text-align:center;margin-top:46px}
+  .announce .lead{
+    font-family:var(--cormorant);font-weight:300;font-size:11px;letter-spacing:1.4px;
+    line-height:2.1;text-transform:uppercase;color:var(--brown-soft);
+  }
+  .announce .who{font-family:var(--garamond);font-weight:400;font-size:43px;color:var(--brown);line-height:1.2;margin-top:18px}
+  .announce .role{font-family:var(--cormorant);font-weight:300;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--brown-soft);margin-top:4px}
+  .announce .amp{font-family:var(--script);font-size:35px;color:var(--brown);margin:14px 0;line-height:1}
+
+  /* ============================================================
+     DATE BAR  (measured sizes: 20 / 12 / 30 / 12 / 18)
+     ============================================================ */
+  .ceremony-at{text-align:center;font-family:var(--serif);font-size:16px;color:var(--brown-soft);line-height:1.9;margin-top:34px}
+  .ceremony-at strong{display:block;font-weight:600;color:var(--brown);letter-spacing:.04em}
+  .at-word{font-family:var(--serif);font-size:16px;color:var(--brown-soft);text-transform:uppercase;margin:14px 0 10px;text-align:center}
+  .datebar{display:flex;align-items:center;justify-content:center;gap:14px;font-weight:300;color:var(--brown)}
+  .datebar .col{display:flex;flex-direction:column;align-items:center;line-height:1.25}
+  .datebar .t{font-family:var(--serif);font-size:20px}
+  .datebar .s{font-family:var(--serif);font-size:12px}
+  .datebar .big{font-family:var(--serif);font-size:30px}
+  .datebar .y{font-family:var(--serif);font-size:18px}
+  .datebar .bar{font-family:var(--serif);font-size:24px;color:rgba(124,106,96,.4)}
+
+  /* ============================================================
+     GALLERY
+     ============================================================ */
+  .gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
+  .gal .ph{aspect-ratio:4/5;border-radius:3px;overflow:hidden}
+  .gal .more::after{
+    content:"+ 4";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(93,78,69,.52);color:#fff;font-size:18px;font-weight:600;
+    font-family:ui-sans-serif,system-ui,sans-serif;
+  }
+
+  /* ============================================================
+     RECEPTION + CALENDAR (brown panel, light text — measured)
+     ============================================================ */
+  .lead-line{text-align:center;font-family:var(--serif);font-size:20px;text-transform:uppercase;color:var(--brown);margin-top:26px;line-height:1.6}
+  .times{display:flex;justify-content:center;gap:44px;margin-top:24px;text-align:center}
+  .times .lbl{font-family:var(--serif);font-weight:300;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--brown-soft)}
+  .times .val{font-family:var(--serif);font-weight:500;font-size:18px;color:var(--brown);margin-top:3px}
+
+  .cal-panel{
+    margin:26px auto 0;width:fit-content;max-width:100%;
+    background:var(--brown);border-radius:10px;padding:0 16px 16px;color:var(--light);overflow:hidden;
+  }
+  .cal-panel h4{font-family:var(--script);font-weight:400;font-size:24px;letter-spacing:.6px;color:var(--light);text-align:center;padding:10px 0 6px}
+  .cal-inner{width:280px;max-width:100%;margin:0 auto;border-radius:8px;overflow:hidden}
+  .cal-head{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:2px solid rgba(222,217,215,.45);padding-bottom:6px}
+  .cal-head div{font-family:var(--serif);font-weight:500;font-size:10px;color:var(--light);text-align:center}
+  .cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:6px}
+  .cal-body .d{font-family:var(--serif);font-weight:300;font-size:12px;color:var(--light);text-align:center;padding:6px 0;border-radius:50%}
+  .cal-body .d.wed{position:relative;color:var(--brown);font-weight:500}
+  .cal-body .d.wed::before{
+    content:"";position:absolute;inset:2px;background:var(--light);border-radius:50%;z-index:-1;
+    animation:beat 2.2s ease-in-out infinite;
+  }
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+
+  .acts{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:28px}
+  .link-btn{
+    font-family:var(--serif);font-size:15px;color:var(--brown);background:none;border:none;
+    cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(124,106,96,.35);padding-bottom:2px;
+  }
+  .link-btn:hover{border-bottom-color:var(--brown)}
+  .pill{
+    font-family:var(--serif);font-size:15px;letter-spacing:.04em;
+    background:var(--brown);color:var(--light);border:none;border-radius:999px;
+    padding:8px 24px;min-height:56px;cursor:pointer;
+    box-shadow:0 8px 18px rgba(93,78,69,.26);transition:transform .2s ease;
+  }
+  .pill:hover{transform:translateY(-2px)}
+
+  /* ============================================================
+     VENUE / DRESS
+     ============================================================ */
+  .addr{text-align:center;font-family:var(--serif);font-size:16px;line-height:1.85;color:var(--brown-soft);margin-top:22px}
+  .dress{margin-top:52px;text-align:center}
+  .dress .code{font-family:var(--script);font-size:38px;color:var(--brown);margin-top:10px;line-height:1.2}
+
+  /* ============================================================
+     SCHEDULE — icon + time + label rows
+     ============================================================ */
+  .sched{margin-top:32px;display:flex;flex-direction:column;gap:20px}
+  .row{display:flex;align-items:center;gap:16px;justify-content:center}
+  .row .ico{width:36px;height:36px;flex-shrink:0;opacity:.85}
+  .row .tm{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--brown);width:62px;text-align:right}
+  .row .lb{font-family:var(--serif);font-size:14px;color:var(--brown-soft);width:150px}
+
+  /* ============================================================
+     GUESTBOOK
+     ============================================================ */
+  .gb{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+  .gb input,.gb textarea{
+    font-family:var(--serif);font-size:15px;color:var(--brown);
+    padding:13px 16px;border:1px solid rgba(124,106,96,.22);border-radius:10px;
+    background:var(--card);outline:none;resize:vertical;
+  }
+  .gb input:focus,.gb textarea:focus{border-color:var(--brown-soft)}
+  .gb .pill{align-self:center;margin-top:6px}
+  .gb-note{text-align:center;font-family:var(--cormorant);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brown-soft);margin-top:4px}
+  .wishes{margin-top:26px;display:flex;flex-direction:column;gap:12px;max-height:400px;overflow-y:auto;padding-right:4px}
+  .wish{background:var(--card);border-radius:12px;padding:14px 16px;box-shadow:0 3px 10px rgba(93,78,69,.07)}
+  .wish .who{font-family:var(--serif);font-weight:600;font-size:14px;color:var(--brown)}
+  .wish .when{font-family:var(--cormorant);font-size:10px;letter-spacing:.06em;color:var(--brown-soft);margin-top:1px}
+  .wish p{margin-top:6px;font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--brown-soft)}
+
+  /* ============================================================
+     GIFT
+     ============================================================ */
+  .gift{text-align:center}
+  .giftbox{margin:32px auto 0;width:132px;height:112px;position:relative;cursor:pointer;transition:transform .3s ease}
+  .giftbox:hover{transform:translateY(-4px)}
+  .giftbox .lid{position:absolute;top:0;left:-8px;right:-8px;height:32px;background:var(--brown);border-radius:4px;z-index:2;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+  .giftbox .box{position:absolute;top:28px;left:0;right:0;bottom:0;background:#8b7a70;border-radius:0 0 6px 6px}
+  .giftbox .rib{position:absolute;top:0;bottom:0;left:50%;width:15px;transform:translateX(-50%);background:rgba(222,217,215,.85);z-index:3;transition:opacity .4s}
+  .giftbox.open .lid{transform:translateY(-44px) rotate(-8deg)}
+  .giftbox.open .rib{opacity:0}
+  .tap{font-family:var(--cormorant);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--brown-soft);margin-top:18px}
+  .gift-msg{max-height:0;overflow:hidden;transition:max-height .8s ease;margin:0 auto;max-width:360px}
+  .gift-msg.show{max-height:280px}
+  .gift-msg .in{
+    margin-top:22px;background:var(--card);border:1px dashed rgba(124,106,96,.4);border-radius:12px;
+    padding:22px;font-family:var(--serif);font-size:15px;line-height:1.7;color:var(--brown);
+  }
+
+  footer{text-align:center;padding:34px 20px 42px;font-family:var(--cormorant);font-size:11px;letter-spacing:.2em;color:var(--brown-soft);text-transform:uppercase}
+
+  /* ============================================================
+     MUSIC TOGGLE
+     ============================================================ */
+  #music{
+    position:fixed;right:14px;bottom:14px;z-index:90;width:42px;height:42px;border-radius:50%;
+    background:var(--brown);border:none;cursor:pointer;display:none;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(93,78,69,.35);
+  }
+  #music.show{display:flex}
+  #music svg{width:18px;height:18px;fill:var(--light)}
+  #music.muted{opacity:.55}
+
+  /* ============================================================
+     DIALOG
+     ============================================================ */
+  dialog{border:none;border-radius:14px;padding:30px 26px;max-width:370px;width:88vw;background:var(--card);color:var(--brown);box-shadow:0 30px 80px rgba(93,78,69,.4)}
+  dialog::backdrop{background:rgba(93,78,69,.45)}
+  dialog h3{font-family:var(--serif);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:.5px;text-align:center}
+  dialog form{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  dialog input,dialog select{font-family:var(--serif);font-size:15px;padding:12px 15px;color:var(--brown);border:1px solid rgba(124,106,96,.22);border-radius:10px;background:#fff;outline:none}
+  dialog .row2{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:6px}
+  .rsvp-done{display:none;text-align:center;font-family:var(--serif);font-size:15px;line-height:1.65;color:var(--brown)}
+
+  /* narrower pages: shrink the names and widen the arch so the two keep clearing each other */
+  @media (max-width:520px){
+    .announce .who{font-size:38px}
+    .arch-bg{width:150%}
+  }
+  @media (max-width:420px){
+    section{padding:52px 20px}
+    .announce .who{font-size:32px}
+    .arch-bg{width:166%}
+    .hero .names{font-size:26px}
+  }
+
+
+/* ── RSVP design preview ──────────────────────────────────────────
+   The form is inert and submits nowhere in this portfolio demo, so it
+   is labelled. Inherits the page's own type and colour deliberately —
+   it should read as a quiet annotation, not an error. */
+.rsvp-preview{
+  margin:0 auto 1.1rem; max-width:34ch;
+  padding:.55rem .9rem;
+  font-size:.78rem; line-height:1.5; letter-spacing:.02em;
+  text-align:center; opacity:.68;
+  border:1px dashed currentColor; border-radius:6px;
+}
+
+.wish-sample-note{margin:0 0 .7rem;font-size:.72rem;letter-spacing:.04em;text-align:center;opacity:.55;text-transform:uppercase}
+</style>
+</head>
+<body class="locked">
+<a href="/invite-sites/#choose-your-style" class="is-backchip" dir="ltr" aria-label="Back to Invite Sites">← Invite Sites</a>
+<style>.is-backchip{position:fixed;top:14px;left:14px;z-index:2147483647;display:inline-flex;align-items:center;min-height:36px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.92);color:#1a1a1a;font:600 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .2s ease}.is-backchip:hover{opacity:.8}@media print{.is-backchip{display:none}}</style>
+
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    
+    <symbol id="branch" viewBox="0 0 220 620">
+      <g stroke="#a89078" stroke-width="1.1" fill="none" opacity=".85">
+        <path d="M112 616 C104 480 110 344 142 214 C158 148 180 88 204 40"/>
+        <path d="M124 486 C104 466 86 456 62 448"/>
+        <path d="M134 392 C116 372 100 362 78 354"/>
+        <path d="M146 300 C130 280 116 270 96 262"/>
+        <path d="M160 214 C148 196 136 186 118 178"/>
+        <path d="M176 140 C166 124 158 116 142 108"/>
+      </g>
+      <g fill="#c6ae8e" opacity=".7">
+        
+        <ellipse cx="98" cy="556" rx="11" ry="6.5" transform="rotate(-18 98 556)"/>
+        <ellipse cx="126" cy="536" rx="11" ry="6.5" transform="rotate(20 126 536)"/>
+        <ellipse cx="100" cy="470" rx="10.5" ry="6.2" transform="rotate(-16 100 470)"/>
+        <ellipse cx="128" cy="446" rx="10.5" ry="6.2" transform="rotate(22 128 446)"/>
+        <ellipse cx="106" cy="386" rx="10" ry="6" transform="rotate(-14 106 386)"/>
+        <ellipse cx="134" cy="360" rx="10" ry="6" transform="rotate(24 134 360)"/>
+        <ellipse cx="114" cy="300" rx="9.5" ry="5.6" transform="rotate(-12 114 300)"/>
+        <ellipse cx="142" cy="274" rx="9.5" ry="5.6" transform="rotate(26 142 274)"/>
+        <ellipse cx="128" cy="216" rx="9" ry="5.4" transform="rotate(-8 128 216)"/>
+        <ellipse cx="156" cy="192" rx="9" ry="5.4" transform="rotate(30 156 192)"/>
+        <ellipse cx="150" cy="138" rx="8.5" ry="5" transform="rotate(4 150 138)"/>
+        <ellipse cx="176" cy="112" rx="8.5" ry="5" transform="rotate(34 176 112)"/>
+        <ellipse cx="196" cy="58" rx="8" ry="4.8" transform="rotate(40 196 58)"/>
+        
+        <ellipse cx="62" cy="448" rx="10" ry="6" transform="rotate(-34 62 448)"/>
+        <ellipse cx="86" cy="462" rx="9" ry="5.4" transform="rotate(-30 86 462)"/>
+        <ellipse cx="78" cy="354" rx="9.5" ry="5.6" transform="rotate(-34 78 354)"/>
+        <ellipse cx="100" cy="368" rx="8.5" ry="5" transform="rotate(-30 100 368)"/>
+        <ellipse cx="96" cy="262" rx="9" ry="5.4" transform="rotate(-34 96 262)"/>
+        <ellipse cx="116" cy="274" rx="8" ry="4.8" transform="rotate(-30 116 274)"/>
+        <ellipse cx="118" cy="178" rx="8.5" ry="5" transform="rotate(-34 118 178)"/>
+        <ellipse cx="142" cy="108" rx="8" ry="4.8" transform="rotate(-32 142 108)"/>
+      </g>
+    </symbol>
+
+    
+    <symbol id="spray" viewBox="0 0 200 260">
+      <g stroke="#a89078" stroke-width="1.2" fill="none">
+        <path d="M34 252 C62 186 74 128 112 44"/>
+        <path d="M72 196 C94 168 116 148 154 128"/>
+        <path d="M58 226 C44 198 34 178 20 158"/>
+        <path d="M92 130 C104 108 118 92 140 74"/>
+      </g>
+      <g fill="#cdb693">
+        <circle cx="112" cy="44" r="6.5"/><circle cx="124" cy="60" r="4.5"/><circle cx="98" cy="62" r="4.5"/>
+        <circle cx="154" cy="128" r="5.5"/><circle cx="142" cy="142" r="4"/><circle cx="164" cy="142" r="3.6"/>
+        <circle cx="20" cy="158" r="5"/><circle cx="32" cy="170" r="3.6"/>
+        <circle cx="140" cy="74" r="5"/><circle cx="128" cy="86" r="3.6"/>
+        <circle cx="86" cy="98" r="4.2"/><circle cx="72" cy="122" r="3.8"/>
+        <circle cx="60" cy="172" r="3.6"/><circle cx="48" cy="206" r="3.2"/>
+      </g>
+    </symbol>
+
+    
+    <symbol id="arch" viewBox="0 0 400 420">
+      <g fill="none" stroke="#b49c85" stroke-width="1.4" opacity=".8">
+        <path d="M70 415 L70 190 A130 130 0 0 1 330 190 L330 415"/>
+        <path d="M96 415 L96 194 A104 104 0 0 1 304 194 L304 415"/>
+        <path d="M40 415 L360 415"/>
+      </g>
+    </symbol>
+
+    
+    <symbol id="divider" viewBox="0 0 200 24">
+      <g stroke="#b49c85" stroke-width="1.1" fill="none">
+        <path d="M4 12 H74"/><path d="M126 12 H196"/>
+        <path d="M100 4 C92 10 92 14 100 20 C108 14 108 10 100 4Z" fill="#c9b294" stroke="none"/>
+        <path d="M84 12 c5-4 9-4 12 0 -3 4-7 4-12 0Z" fill="#c9b294" stroke="none"/>
+        <path d="M116 12 c-5-4-9-4-12 0 3 4 7 4 12 0Z" fill="#c9b294" stroke="none"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+
+<div id="envelope">
+  <div class="env-card">
+    <div class="env-clip">
+      <div class="grain"></div>
+      <svg class="decor" style="left:-46px;top:6px;width:190px;opacity:.95"><use href="#spray"/></svg>
+      <svg class="decor" style="right:-52px;top:-14px;width:200px;transform:scaleX(-1);opacity:.85"><use href="#spray"/></svg>
+    </div>
+    <div class="env-seal">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.2C.4 8.6 2.2 5 5.7 5c2 0 3.4 1.1 4.3 2.6C10.9 6.1 12.3 5 14.3 5c3.5 0 5.3 3.6 3.7 6.8C19.5 16.1 12 21 12 21z"/></svg>
+    </div>
+    <div class="env-inner">
+      <div class="env-names">Ahmad<span class="amp">&amp;</span>Sara</div>
+      <svg class="env-orn" viewBox="0 0 200 24"><use href="#divider"/></svg>
+      <div class="env-date">January 1, 2027</div>
+      <div class="env-sub">Cordially Invites</div>
+      <button type="button" class="btn-open" id="openBtn">Open</button>
+    </div>
+  </div>
+</div>
+
+
+<main class="page">
+
+  
+  <section class="hero">
+    <div class="grain"></div>
+    <svg class="decor leaf-l" viewBox="0 0 220 620" style="opacity:.3"><use href="#branch"/></svg>
+    <svg class="decor leaf-r" viewBox="0 0 220 620" style="opacity:.24"><use href="#branch"/></svg>
+    <p class="eyebrow rv">The Wedding Of</p>
+    <h1 class="names rv">Ahmad <span class="amp">&amp;</span> Sara</h1>
+    <figure class="frame rv">
+      <div class="tape"></div>
+      <div class="shot">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.2-2.4A1 1 0 0 1 10.1 4h3.8a1 1 0 0 1 .9.6L16 7"/></svg>
+          <span>Your photo</span>
+        </div>
+        <figcaption class="cap">our story begins</figcaption>
+      </div>
+    </figure>
+  </section>
+
+  
+  <section class="warm">
+    <div class="grain"></div>
+    <svg class="decor arch-bg" viewBox="0 0 400 420"><use href="#arch"/></svg>
+    <h2 class="sec-title rv">Ceremony Info</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+
+    <div class="fams rv">
+      <div class="fam">
+        <div class="mr">Mr. &amp; Mrs.</div>
+        <div class="nm">Henry AlTamimi<br>Alice AlTamimi</div>
+        <div class="city">Boston, Massachusetts</div>
+      </div>
+      <div class="fam">
+        <div class="mr">Mr. &amp; Mrs.</div>
+        <div class="nm">Charles AlKhalidi<br>Marianne AlKhalidi</div>
+        <div class="city">New Haven, Connecticut</div>
+      </div>
+    </div>
+
+    <div class="announce rv">
+      <p class="lead">With joyful hearts we announce<br>the wedding of our children</p>
+      <div class="who">Ahmad AlTamimi</div>
+      <div class="role">The Groom</div>
+      <div class="amp">&amp;</div>
+      <div class="who">Sara AlKhalidi</div>
+      <div class="role">The Bride</div>
+    </div>
+
+    <div class="ceremony-at rv">
+      Wedding ceremony at
+      <strong>FAMILY HOME</strong>
+    </div>
+    <div class="at-word rv">at</div>
+    <div class="datebar rv">
+      <div class="col"><span class="t">09:00</span><span class="s">FRIDAY</span></div>
+      <span class="bar">|</span>
+      <div class="col"><span class="big">20</span></div>
+      <span class="bar">|</span>
+      <div class="col"><span class="s">JANUARY</span><span class="y">2027</span></div>
+    </div>
+  </section>
+
+  
+  <section>
+    <div class="grain"></div>
+    <h2 class="sec-title rv">Photo Gallery</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+    <div class="gal rv">
+      <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.2-2.4A1 1 0 0 1 10.1 4h3.8a1 1 0 0 1 .9.6L16 7"/></svg><span>Photo 1</span></div>
+      <div class="ph" style="background:linear-gradient(155deg,#e3d2bf,#cbb094)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.2-2.4A1 1 0 0 1 10.1 4h3.8a1 1 0 0 1 .9.6L16 7"/></svg><span>Photo 2</span></div>
+      <div class="ph" style="background:linear-gradient(155deg,#e7d7c4,#c6ab92)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.2-2.4A1 1 0 0 1 10.1 4h3.8a1 1 0 0 1 .9.6L16 7"/></svg><span>Photo 3</span></div>
+      <div class="ph more" style="background:linear-gradient(155deg,#dcc7ae,#bda07e)"></div>
+    </div>
+  </section>
+
+  
+  <section class="warm">
+    <div class="grain"></div>
+    <svg class="decor" style="right:-18%;top:-6%;width:46%;opacity:.2" viewBox="0 0 220 620"><use href="#branch"/></svg>
+    <h2 class="sec-title rv">Reception Info</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+    <p class="lead-line rv">The reception will take place at:</p>
+
+    <div class="datebar rv" style="margin-top:22px">
+      <div class="col"><span class="t">17:00</span><span class="s">FRIDAY</span></div>
+      <span class="bar">|</span>
+      <div class="col"><span class="big">20</span></div>
+      <span class="bar">|</span>
+      <div class="col"><span class="s">JANUARY</span><span class="y">2027</span></div>
+    </div>
+
+    <div class="times rv">
+      <div><div class="lbl">Welcome</div><div class="val">16:30</div></div>
+      <div><div class="lbl">Reception</div><div class="val">17:00</div></div>
+    </div>
+
+    <div class="cal-panel rv">
+      <h4>January 2027</h4>
+      <div class="cal-inner">
+        <div class="cal-head">
+          <div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div><div>Su</div>
+        </div>
+        <div class="cal-body" id="calBody"></div>
+      </div>
+    </div>
+
+    <div class="acts rv">
+      <a class="link-btn" id="icsBtn" download="julian-eleanor-wedding.ics">Add to Calendar</a>
+      <button type="button" class="pill" id="rsvpBtn">Confirm Attendance</button>
+    </div>
+  </section>
+
+  
+  <section>
+    <div class="grain"></div>
+    <h2 class="sec-title rv">Wedding Reception Venue</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+    <p class="addr rv">The Ivory Ballroom,<br>18 Almond Row, New York</p>
+    <div class="dress rv">
+      <h2 class="sec-title">Dress Code</h2>
+      <div class="code">Party Attire</div>
+    </div>
+  </section>
+
+  
+  <section class="warm">
+    <div class="grain"></div>
+    <svg class="decor" style="left:-14%;top:-8%;width:44%;opacity:.18" viewBox="0 0 220 620"><use href="#branch"/></svg>
+    <h2 class="sec-title rv">Wedding Day Schedule</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+    <div class="sched rv">
+      <div class="row">
+        <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="#8b7a70" stroke-width="1.3">
+          <path d="M8 32V14a10 10 0 0 1 20 0v18"/><path d="M18 6V4"/><path d="M18 32V13"/><path d="M4 32h28"/>
+        </svg>
+        <div class="tm">17:00</div><div class="lb">Welcome guests</div>
+      </div>
+      <div class="row">
+        <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="#8b7a70" stroke-width="1.3">
+          <path d="M8 30h20a2 2 0 0 0 2-2v-6H6v6a2 2 0 0 0 2 2Z"/><path d="M9 22v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5"/><path d="M18 15V9"/><circle cx="18" cy="6" r="2"/>
+        </svg>
+        <div class="tm">18:00</div><div class="lb">Reception begins</div>
+      </div>
+      <div class="row">
+        <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="#8b7a70" stroke-width="1.3">
+          <path d="M10 30V16a8 8 0 0 1 16 0v14"/><path d="M18 30V16"/><path d="M6 30h24"/>
+        </svg>
+        <div class="tm">18:30</div><div class="lb">Wedding ceremony</div>
+      </div>
+      <div class="row">
+        <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="#8b7a70" stroke-width="1.3">
+          <path d="M11 6h6l1 10a4 4 0 0 1-8 0Z"/><path d="M14 20v8"/><path d="M10 30h8"/>
+          <path d="M23 6h6l-1 10a4 4 0 0 1-8 0Z" opacity=".7"/><path d="M25 20v8" opacity=".7"/><path d="M21 30h8" opacity=".7"/>
+        </svg>
+        <div class="tm">19:00</div><div class="lb">Cake cutting &amp; toast</div>
+      </div>
+      <div class="row">
+        <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="#8b7a70" stroke-width="1.3">
+          <path d="M18 28s-9-6-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 12-9 12Z"/>
+        </svg>
+        <div class="tm">20:30</div><div class="lb">Farewell</div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section>
+    <div class="grain"></div>
+    <h2 class="sec-title rv">Guestbook</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+    <p class="rsvp-preview" role="note">Guestbook preview — not active in this example</p>
+      <form class="gb rv" id="gbForm" inert aria-disabled="true">
+      <input type="text" id="gbName" placeholder="Your name" maxlength="60" required>
+      <textarea id="gbMsg" rows="3" placeholder="Write your wishes for the couple…" maxlength="300" required></textarea>
+      <button class="pill" type="button">Send Wishes</button>
+      <p class="gb-note">Demo guestbook — saved in this browser only</p>
+    </form>
+    <p class="wish-sample-note">Sample messages, shown to illustrate the design</p>
+    <div class="wishes" id="wishes"></div>
+  </section>
+
+  
+  <section class="warm gift">
+    <div class="grain"></div>
+    <h2 class="sec-title rv">Gift Box</h2>
+    <svg class="orn rv" viewBox="0 0 200 24"><use href="#divider"/></svg>
+    <div class="giftbox rv" id="giftbox" role="button" tabindex="0" aria-label="Open the gift box">
+      <div class="lid"></div><div class="rib"></div><div class="box"></div>
+    </div>
+    <p class="tap rv">Tap to open</p>
+    <div class="gift-msg" id="giftMsg">
+      <div class="in">Your presence would be the greatest gift we could receive!</div>
+    </div>
+  </section>
+
+  <footer>♡ Ahmad &amp; Sara · January 1, 2027</footer>
+</main>
+
+
+<audio id="audio" loop preload="none"><source src="music.mp3" type="audio/mpeg"></audio>
+<button type="button" id="music" class="muted" aria-label="Toggle music">
+  <svg id="musicIcon" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+</button>
+
+<dialog id="rsvpDialog">
+  <h3>Confirm Attendance</h3>
+  <p class="rsvp-preview" role="note">RSVP preview — not active in this example</p>
+      <form method="dialog" id="rsvpForm" inert aria-disabled="true">
+    <input type="text" id="rsvpName" placeholder="Your name" required>
+    <select id="rsvpCount">
+      <option value="1">1 guest</option><option value="2">2 guests</option>
+      <option value="3">3 guests</option><option value="4">4 guests</option>
+    </select>
+    <select id="rsvpAns">
+      <option value="yes">Joyfully accepts</option>
+      <option value="no">Regretfully declines</option>
+    </select>
+    <div class="row2">
+      <button type="button" class="link-btn" value="cancel" formnovalidate>Close</button>
+      <button type="button" class="pill" id="rsvpSubmit" value="default">Confirm</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+/* ---------- envelope ---------- */
+const envelope = document.getElementById('envelope');
+const audio = document.getElementById('audio');
+const musicBtn = document.getElementById('music');
+let audioAvailable = false;
+
+audio.addEventListener('canplay', () => { audioAvailable = true; musicBtn.classList.add('show'); });
+audio.addEventListener('error', () => { audioAvailable = false; musicBtn.classList.remove('show'); });
+audio.load();
+
+document.getElementById('openBtn').addEventListener('click', () => {
+  envelope.classList.add('opened');
+  document.body.classList.remove('locked');
+  if (audioAvailable) {
+    audio.volume = 0.5;
+    audio.play().then(() => musicBtn.classList.remove('muted')).catch(() => {});
+  }
+});
+musicBtn.addEventListener('click', () => {
+  if (audio.paused) { audio.play().then(()=>musicBtn.classList.remove('muted')).catch(()=>{}); }
+  else { audio.pause(); musicBtn.classList.add('muted'); }
+});
+
+/* ---------- scroll reveal ---------- */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* ---------- calendar: January 2027 starts Friday (Monday-first grid) ---------- */
+const calBody = document.getElementById('calBody');
+for (let i = 0; i < 4; i++) calBody.appendChild(document.createElement('div'));
+for (let d = 1; d <= 31; d++) {
+  const c = document.createElement('div');
+  c.className = 'd' + (d === 1 ? ' wed' : '');
+  c.textContent = d;
+  calBody.appendChild(c);
+}
+
+/* ---------- .ics ---------- */
+const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Invite//EN','BEGIN:VEVENT',
+  'UID:ahmad-sara-20270101@invite.local','DTSTAMP:20260101T000000Z',
+  'DTSTART:20270101T170000','DTEND:20270101T203000',
+  'SUMMARY:Ahmad & Sara — Wedding Reception',
+  'LOCATION:The Ivory Ballroom\\, 18 Almond Row\\, New York',
+  'END:VEVENT','END:VCALENDAR'].join('\r\n');
+document.getElementById('icsBtn').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+
+/* ---------- RSVP (demo only — nothing is sent) ---------- */
+const dlg = document.getElementById('rsvpDialog');
+document.getElementById('rsvpBtn').addEventListener('click', () => {
+  document.getElementById('rsvpForm').style.display = 'flex';
+  dlg.showModal();
+});
+
+
+/* ---------- guestbook ---------- */
+const seedWishes = [
+  ['Amelia Hart',"Overjoyed for the two of you — here's to a marriage full of laughter and light."],
+  ['Oliver Grant','Raising a glass to Ahmad and Sara. May the years ahead be your best yet.'],
+  ['Sofia Delaney','Such an elegant invitation! Counting down the days until we celebrate with you.'],
+  ['Nathaniel Cole','May your life together be as beautiful as the day you say "I do".'],
+  ['Rosalind Fay','Two wonderful people, one wonderful future. Sending you all our love.'],
+  ['Edmund Blake',"Can't wait to dance at your wedding! Congratulations to you both."],
+  ['Clara Whitfield','Wishing you a home full of warmth and a marriage full of joy.'],
+  ['Frederick Ames','To new beginnings and a lifetime of shared adventures — congratulations!'],
+];
+const KEY = 'garden-script-guestbook';
+const wishesEl = document.getElementById('wishes');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function loadWishes(){
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(_){}
+  const all = [...saved, ...seedWishes.map(([n,m]) => ({n, m, t: 'June 2, 2026'}))];
+  wishesEl.innerHTML = all.map(w =>
+    `<div class="wish"><div class="who">${esc(w.n)}</div><div class="when">${esc(w.t)}</div><p>${esc(w.m)}</p></div>`
+  ).join('');
+}
+
+loadWishes();
+
+/* ---------- gift ---------- */
+const giftbox = document.getElementById('giftbox');
+const toggleGift = () => {
+  giftbox.classList.toggle('open');
+  document.getElementById('giftMsg').classList.toggle('show', giftbox.classList.contains('open'));
+};
+giftbox.addEventListener('click', toggleGift);
+giftbox.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleGift(); } });
+</script>
+</body>
+</html>
+
+/* RSVP / guestbook are a design preview in this portfolio demo: the
+   forms are inert and submit nowhere, so the handler that faked a
+   confirmation was removed (DECISIONS-2 D7). A working-looking form
+   that records nothing lies to whoever uses it. Real submissions
+   arrive in Phase 5 via our own Route Handler. */

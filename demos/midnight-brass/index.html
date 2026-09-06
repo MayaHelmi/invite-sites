@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+
+<title>Ahmad AlTamimi — Graduation Party</title>
+<meta name="description" content="I finished. Friday 1 January 2027, 8:00 PM, The Terrace Hall rooftop.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1526">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:title" content="Ahmad AlTamimi — Graduation Party">
+<meta property="og:description" content="Fri 1 Jan 2027 · 8:00 PM · The Terrace Hall">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Barlow:wght@200;300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="is-locked">
+<a href="/invite-sites/#choose-your-style" class="is-backchip" dir="ltr" aria-label="Back to Invite Sites">← Invite Sites</a>
+<style>.is-backchip{position:fixed;top:14px;left:14px;z-index:2147483647;display:inline-flex;align-items:center;min-height:36px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.92);color:#1a1a1a;font:600 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .2s ease}.is-backchip:hover{opacity:.8}@media print{.is-backchip{display:none}}</style>
+
+
+<div class="backdrop" aria-hidden="true"></div>
+<canvas id="embers" class="embers" aria-hidden="true"></canvas>
+
+
+<div class="intro" id="intro">
+  <div class="intro-beam" aria-hidden="true"></div>
+
+  <div class="scroll" id="scroll" role="button" tabindex="0"
+       aria-label="Pull the diploma downward to unroll it">
+
+    <div class="sc-paper" id="scPaper">
+      <div class="sc-inner" id="scInner">
+        <span class="sp-eyebrow">It's official</span>
+        <span class="sp-name">Ahmad<br>AlTamimi</span>
+        <span class="sp-rule" aria-hidden="true"><i>★</i></span>
+        <span class="sp-degree">Class of 2026</span>
+      </div>
+    </div>
+
+    <div class="sc-roll sc-top" id="scTop" aria-hidden="true"><span></span></div>
+    <div class="sc-roll sc-bot" id="scBot" aria-hidden="true"><span></span></div>
+
+    <div class="sc-ribbon" id="scRibbon" aria-hidden="true">
+      <span class="rb-band"></span>
+      <span class="rb-medal">
+        <svg viewBox="0 0 100 100">
+          <circle class="md-face" cx="50" cy="50" r="44"/>
+          <circle class="md-ring" cx="50" cy="50" r="44"/>
+          <circle class="md-ring thin" cx="50" cy="50" r="35"/>
+          <text class="md-year" x="50" y="59" text-anchor="middle">26</text>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="drag-hint" id="dragHint" aria-hidden="true">
+    <svg viewBox="0 0 34 44">
+      <rect class="dh-grip" x="4" y="3" width="26" height="5" rx="2.5"/>
+      <path class="dh-chev" d="M6 16 L17 26 L28 16"/>
+      <path class="dh-chev" d="M6 28 L17 38 L28 28"/>
+    </svg>
+  </div>
+
+  <p class="intro-hint" id="introHint" data-continue="tap to continue">pull down to unroll</p>
+</div>
+
+
+<main class="site" id="site">
+
+  
+  <header class="hero" id="top">
+    <div class="hero-rule-t" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow reveal">Five years. One degree.</p>
+
+      <h1 class="hero-name reveal"><span class="hn-1">Ahmad</span><span class="hn-2">AlTamimi</span></h1>
+
+      <p class="hero-degree reveal">
+        BSc Mechanical Engineering <i>/</i> Class of 2026
+      </p>
+
+      
+      <button class="cap" id="cap" type="button" aria-label="Turn the tassel">
+        <svg viewBox="0 0 150 118" aria-hidden="true">
+          <path class="cap-board" d="M75 12 L142 40 L75 68 L8 40 Z"/>
+          <path class="cap-base"  d="M40 52 L40 82 Q75 102 110 82 L110 52 L75 68 Z"/>
+          <g class="cap-tassel" id="tassel">
+            <path class="ts-cord" d="M75 40 L124 44 L124 74" fill="none"/>
+            <circle class="ts-knot" cx="124" cy="76" r="4.2"/>
+            <path class="ts-fringe" d="M119.5 79 L118.5 99 M121.7 79.5 L121 101 M124 80 L124 102 M126.3 79.5 L127 101 M128.5 79 L129.5 99"/>
+          </g>
+        </svg>
+        <span class="cap-tip" id="capTip">turn the tassel</span>
+      </button>
+
+      <p class="hero-call reveal">Now there's a party. Come.</p>
+    </div>
+
+    <a href="#pass" class="scroll-cue" aria-label="Scroll to your pass">
+      <span class="cue-label">Your pass</span>
+      <span class="cue-line" aria-hidden="true"></span>
+    </a>
+  </header>
+
+  
+  <section class="section pass" id="pass" aria-labelledby="pass-h">
+    <div class="head-l reveal">
+      <p class="eyebrow">The details</p>
+      <h2 class="section-title" id="pass-h">Your Pass</h2>
+    </div>
+
+    <div class="ticket reveal">
+      <div class="tk-main">
+        <div class="tk-top">
+          <p class="tk-tag">Admit one</p>
+          <p class="tk-serial" aria-hidden="true">№ 2026</p>
+        </div>
+
+        <h3 class="tk-name">Graduation Party</h3>
+        <p class="tk-host">Ahmad AlTamimi</p>
+
+        <dl class="tk-grid">
+          <div><dt>Date</dt><dd>Fri 1 Jan 2027</dd></div>
+          <div><dt>Doors</dt><dd>8:00 PM</dd></div>
+          <div><dt>Venue</dt><dd>The Terrace Hall</dd></div>
+          <div><dt>Level</dt><dd>Rooftop</dd></div>
+        </dl>
+
+        <div class="tk-code" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="tk-perf" aria-hidden="true"></div>
+
+      <div class="tk-stub">
+        <p class="tk-stub-label">Starts in</p>
+
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="cd-unit"><b id="cdD">00</b><small>days</small></div>
+          <div class="cd-unit"><b id="cdH">00</b><small>hrs</small></div>
+          <div class="cd-unit"><b id="cdM">00</b><small>min</small></div>
+          <div class="cd-unit"><b id="cdS">00</b><small>sec</small></div>
+        </div>
+
+        <div class="cal" id="cal">
+          <button class="btn btn-ghost" id="calBtn" type="button"
+                  aria-haspopup="menu" aria-expanded="false" aria-controls="calMenu">
+            <svg class="btn-ico" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>
+            </svg>
+            Add to calendar
+          </button>
+          <div class="cal-menu" id="calMenu" role="menu" hidden>
+            <a role="menuitem" id="calGoogle"  target="_blank" rel="noopener">Google Calendar</a>
+            <a role="menuitem" id="calOutlook" target="_blank" rel="noopener">Outlook</a>
+            <a role="menuitem" id="calApple"   download="graduation.ics">Apple / iCal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section run-sec" id="run" aria-labelledby="run-h">
+    <div class="head-l reveal">
+      <p class="eyebrow">How the night goes</p>
+      <h2 class="section-title" id="run-h">Run of Show</h2>
+    </div>
+
+    <ol class="run">
+      <li class="run-row reveal">
+        <span class="run-time">8:00</span>
+        <div class="run-body">
+          <h3>Doors</h3>
+          <p>Rooftop level. Come early — the view is the whole point.</p>
+        </div>
+      </li>
+      <li class="run-row reveal">
+        <span class="run-time">9:00</span>
+        <div class="run-body">
+          <h3>Dinner</h3>
+          <p>Served on the terrace. Seating is open, sit wherever.</p>
+        </div>
+      </li>
+      <li class="run-row reveal">
+        <span class="run-time">10:00</span>
+        <div class="run-body">
+          <h3>A few words</h3>
+          <p>Short ones. I've been warned.</p>
+        </div>
+      </li>
+      <li class="run-row run-last reveal">
+        <span class="run-time">11:00</span>
+        <div class="run-body">
+          <h3>Music</h3>
+          <p>Until they make us leave. No alarm set for the morning.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  
+  <section class="section venue" id="venue" aria-labelledby="venue-h">
+    <div class="head-l reveal">
+      <p class="eyebrow">Getting there</p>
+      <h2 class="section-title" id="venue-h">The Terrace Hall</h2>
+    </div>
+
+    <div class="venue-wrap reveal">
+      <div class="venue-map">
+        <iframe id="venueMap" title="Map showing The Terrace Hall" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=35.87%2C31.94%2C35.95%2C32.00&layer=mapnik&marker=31.9700%2C35.9100"></iframe>
+        <div class="map-fallback" aria-hidden="true"><span>The Terrace Hall</span></div>
+      </div>
+
+      <div class="venue-info">
+        <p class="vi-addr">Rooftop Level<br>Almond Quarter, Amman</p>
+        <div class="vi-actions">
+          <a class="btn btn-solid" id="mapGoogle" target="_blank" rel="noopener">
+            <svg class="btn-ico" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/>
+            </svg>
+            Google Maps
+          </a>
+          <a class="btn btn-ghost" id="mapApple" target="_blank" rel="noopener">Apple Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section know" id="know" aria-labelledby="know-h">
+    <div class="head-l reveal">
+      <p class="eyebrow">Before you come</p>
+      <h2 class="section-title" id="know-h">Good to Know</h2>
+    </div>
+
+    <ul class="know-grid">
+      <li class="know-card reveal">
+        <span class="kc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 7V5h10v2M8 19v2M16 19v2"/></svg>
+        </span>
+        <h3>Parking</h3>
+        <p>Underground garage, entrance on the north side. Free after 7 PM.</p>
+      </li>
+      <li class="know-card reveal">
+        <span class="kc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M5 10l7-7 7 7"/><rect x="6" y="12" width="12" height="9" rx="1.5"/></svg>
+        </span>
+        <h3>No gifts</h3>
+        <p>Genuinely. Your being there is the whole thing.</p>
+      </li>
+      <li class="know-card reveal">
+        <span class="kc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.6"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+        </span>
+        <h3>Photos</h3>
+        <p>Take plenty. Send me the good ones — I'll be busy.</p>
+      </li>
+      <li class="know-card reveal">
+        <span class="kc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg>
+        </span>
+        <h3>Getting home</h3>
+        <p>Taxis queue at the boulevard entrance until 2 AM.</p>
+      </li>
+    </ul>
+  </section>
+
+  
+  <section class="section rsvp-cta" id="rsvp" aria-labelledby="rsvp-h">
+    <div class="rsvp-panel reveal">
+      <p class="eyebrow">Last thing</p>
+      <h2 class="section-title" id="rsvp-h">Are you in?</h2>
+      <p class="section-lede">Tell me by <b>20 December</b> so I can count the seats.</p>
+      <button class="btn btn-solid btn-lg" data-open-rsvp type="button">Reply</button>
+    </div>
+  </section>
+
+  
+  <footer class="foot">
+    <p class="foot-mono" aria-hidden="true">OA</p>
+    <p class="foot-line">See you on the roof.</p>
+    <p class="foot-date">01 · 01 · 2027</p>
+  </footer>
+</main>
+
+<div class="sticky-cta" id="stickyCta" hidden>
+  <button class="btn btn-solid" data-open-rsvp type="button">RSVP</button>
+</div>
+
+
+<div class="modal" id="rsvpModal" hidden>
+  <div class="modal-scrim" data-close-rsvp></div>
+
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+    <button class="modal-x" type="button" data-close-rsvp aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <div class="modal-head">
+      <p class="eyebrow">RSVP</p>
+      <h2 id="rsvpTitle" class="modal-title">Are you in?</h2>
+    </div>
+
+    
+    <p class="rsvp-preview" role="note">RSVP preview — not active in this example</p>
+      <form class="rsvp-form" id="rsvpForm" novalidate inert aria-disabled="true">
+
+      <label class="field">
+        <span class="field-label">Your name</span>
+        <input type="text" name="name" id="rsvpName" required autocomplete="name"
+               placeholder="So I know who's in">
+      </label>
+
+      <div class="field">
+        <span class="field-label">Will you make it?</span>
+        <div class="choice choice-2">
+          <label class="chip"><input type="radio" name="attending" value="Coming" required><span>Count me in</span></label>
+          <label class="chip"><input type="radio" name="attending" value="Not coming"><span>Can't make it</span></label>
+        </div>
+      </div>
+
+      <div class="field guests-field" id="guestsField" hidden>
+        <span class="field-label">Bringing anyone? <i>(not counting you)</i></span>
+        <div class="counter" role="group" aria-label="Number of guests">
+          <button type="button" class="cnt-btn" id="guestMinus" aria-label="One fewer guest">−</button>
+          <output class="cnt-val" id="guestOut" for="guests">0</output>
+          <button type="button" class="cnt-btn" id="guestPlus" aria-label="One more guest">+</button>
+        </div>
+        <input type="hidden" name="guests" id="guests" value="0">
+        <p class="cnt-hint" id="guestHint">Up to 5 guests</p>
+      </div>
+
+      <p class="form-error" id="formError" role="alert" hidden></p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-solid" id="stepSend">Send it</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
